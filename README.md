@@ -15,6 +15,7 @@ Acesse a versão publicada: [Clique aqui para acessar](https://product-catalog-p
 - Exibir produtos **favoritos**
 - Visualização de **detalhes** do produto via botão de lupa
 - Inclusão de **novos produtos**
+- Remoção de **produtos**
 - Interface responsiva e moderna
 - Desenvolvido com **Next.js + TypeScript**
 
