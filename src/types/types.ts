@@ -43,13 +43,17 @@ export type CategoryProps = {
 export type ProductsListProps = {
 	products: ProductsInterface[];
 	isLikedList: ProductsInterface[];
+	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setIsLikedList: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 };
 
 export type ProductProps = {
 	product: ProductsInterface;
 	isLikedList: ProductsInterface[];
+	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setIsLikedList: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 };
 
 export type PopupDetailsProps = {
