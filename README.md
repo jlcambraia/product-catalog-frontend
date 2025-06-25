@@ -2,19 +2,19 @@
 
 Catálogo de produtos desenvolvido com **Next.js** e **TypeScript**, com filtros por categoria, sistema de favoritos, busca por texto e exibição de detalhes dos produtos. O projeto utiliza **dados mockados** no frontend, com planos de futura integração com um backend próprio.
 
-👉 Acesse a versão publicada: [https://product-catalog-pink.vercel.app/](https://product-catalog-pink.vercel.app/)
+Acesse a versão publicada: [https://product-catalog-pink.vercel.app/](Clique Aqui!)
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
-- ✅ Filtro por **categorias** (Acessórios, Móveis, Eletrônicos, Roupas)
-- ✅ Busca por **termo no input**
-- ✅ Exibição de **lista de produtos**
-- ✅ Marcar produtos como **favoritos** (e filtrar por favoritos)
-- ✅ Visualização de **detalhes** do produto via botão de lupa
-- ✅ Interface responsiva e moderna
-- ✅ Desenvolvido com **Next.js + TypeScript**
+✅ Filtro por **categorias** (Acessórios, Móveis, Eletrônicos, Roupas)
+✅ Busca por **termo no input**
+✅ Exibição de **lista de produtos**
+✅ Marcar produtos como **favoritos** (e filtrar por favoritos)
+✅ Visualização de **detalhes** do produto via botão de lupa
+✅ Interface responsiva e moderna
+✅ Desenvolvido com **Next.js + TypeScript**
 
 ---
 
@@ -67,9 +67,9 @@ npm run dev
 yarn dev
 ```
 
----
-
 4. **Acesse no navegador: http://localhost:3000**
+
+---
 
 ## Possíveis Melhorias Futuras
 
@@ -77,6 +77,8 @@ yarn dev
 - Paginação ou carregamento infinito
 - Autenticação de usuários
 - Dark Mode
+
+---
 
 ## Autor
 
