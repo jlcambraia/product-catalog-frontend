@@ -1,0 +1,74 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.buttonsAndSearchContainer {
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  width: 36px;
+  height: 100%;
+  display: block;
+  padding-bottom: 10px;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 28px;
+}
+
+.addButton {
+  background-image: url(../../assets/icons/add-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-left: auto;
+  width: 22px;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.favoriteButton {
+  background-image: url(../../assets/icons/heart-hover.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 32px;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  filter: grayscale(100%);
+  opacity: 0.25;
+}
+
+@media screen and (max-width: 750px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .container {
+    margin-bottom: 15px;
+  }
+}
