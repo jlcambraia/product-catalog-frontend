@@ -1,0 +1,201 @@
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.container {
+  position: relative;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 500px;
+}
+
+.button {
+  background-image: url(../../assets/icons/close-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 24px;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  padding: 0;
+  top: -55%;
+  right: -25px;
+}
+
+.button:hover {
+  filter: opacity(0.6);
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.imageAndDescriptionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  padding: 25px 15px;
+}
+
+.description {
+  margin-bottom: 30px;
+}
+
+.likeButtonAndStockContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
+  gap: 5px;
+  width: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  border: solid 1px #e1e7e9;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.label {
+  font-size: 10px;
+  color: #9da1a2;
+  text-align: center;
+}
+
+.quantity {
+  text-align: center;
+  font-size: 16px;
+}
+
+.buttonLike {
+  background-image: url(../../assets/icons/heart.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 24px;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-image 0.1s ease;
+}
+
+.buttonLike:hover {
+  background-image: url(../../assets/icons/heart-hover.png);
+  opacity: 0.7;
+}
+
+.buttonLikeFilled {
+  background-image: url(../../assets/icons/heart-filled.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 24px;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: background-image 0.1s ease;
+}
+
+.stockContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  border: solid 1px #e1e7e9;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 610px) {
+  .container {
+    width: 400px;
+  }
+
+  .buttonLike {
+    background-size: contain;
+  }
+
+  .buttonLikeFilled {
+    background-size: contain;
+  }
+
+  .quantity {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .imageAndDescriptionContainer {
+    flex-direction: column;
+  }
+
+  .descriptionContainer {
+    width: 100%;
+  }
+
+  .description {
+    text-align: center;
+  }
+
+  .quantity {
+    font-size: 18px;
+  }
+
+  .buttonLike {
+    height: 24px;
+  }
+
+  .buttonLikeFilled {
+    height: 24px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 20px;
+  }
+
+  .button {
+    right: 0;
+  }
+}
