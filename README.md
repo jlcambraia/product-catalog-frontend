@@ -30,7 +30,7 @@ Acesse a versão publicada: [Clique aqui para acessar](https://product-catalog-p
 
 ---
 
-## 🛠️ Como Rodar Localmente
+## Como Rodar Localmente
 
 1. **Clone o repositório**
 
@@ -47,7 +47,7 @@ npm install
 yarn install
 ```
 
-2. **Inicie o servidor de desenvolvimento**
+3. **Inicie o servidor de desenvolvimento**
 
 ```bash
 npm run dev
