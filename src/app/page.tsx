@@ -51,6 +51,8 @@ export default function Home() {
 						products={products}
 						isLikedList={isLikedList}
 						setIsLikedList={setIsLikedList}
+						setProducts={setProducts}
+						setAllProducts={setAllProducts}
 					/>
 				</main>
 				<Footer />

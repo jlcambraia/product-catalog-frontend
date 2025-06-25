@@ -6,7 +6,9 @@ import { ProductsListProps } from '@/types/types';
 const ProductsList = ({
 	products,
 	isLikedList,
+	setProducts,
 	setIsLikedList,
+	setAllProducts,
 }: ProductsListProps) => {
 	if (products.length === 0) {
 		return (
@@ -23,7 +25,9 @@ const ProductsList = ({
 					key={product.id}
 					product={product}
 					isLikedList={isLikedList}
+					setProducts={setProducts}
 					setIsLikedList={setIsLikedList}
+					setAllProducts={setAllProducts}
 				/>
 			))}
 		</ul>
