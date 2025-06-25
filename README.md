@@ -8,27 +8,15 @@ Acesse a versão publicada: [Clique aqui para acessar](https://product-catalog-p
 
 ## Funcionalidades
 
-✅ Filtro por **categorias** (Acessórios, Móveis, Eletrônicos, Roupas)
-✅ Busca por **termo no input**
-✅ Exibição de **lista de produtos**
-✅ Marcar produtos como **favoritos** (e filtrar por favoritos)
-✅ Visualização de **detalhes** do produto via botão de lupa
-✅ Interface responsiva e moderna
-✅ Desenvolvido com **Next.js + TypeScript**
-
----
-
-## Capturas de Tela
-
-### Página Inicial com Filtros
-
-![Página Inicial](https://user-images.githubusercontent.com/your-screenshot-1.png)
-
-### Detalhes do Produto
-
-![Detalhes](https://user-images.githubusercontent.com/your-screenshot-2.png)
-
-> _[Substitua os links acima por screenshots reais do projeto hospedados no GitHub ou no Imgur]_
+- Filtro por **categorias**
+- Busca por **termo no input**
+- Exibição de **lista de produtos**
+- Marcar produtos como **favoritos**
+- Exibir produtos **favoritos**
+- Visualização de **detalhes** do produto via botão de lupa
+- Inclusão de **novos produtos**
+- Interface responsiva e moderna
+- Desenvolvido com **Next.js + TypeScript**
 
 ---
 
