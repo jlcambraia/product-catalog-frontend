@@ -1,0 +1,99 @@
+.card {
+  background-color: #fff;
+  border: 1px solid #e1e7e9;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.imageAndPriceContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.name {
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.price {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #e1e7e9;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  padding: 10px;
+}
+
+.buttonContainer:first-child {
+  border-right: 1px solid #e1e7e9;
+}
+
+.buttonLike {
+  background-image: url(../../../assets/icons/heart.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-image 0.1s ease;
+}
+
+.buttonLike:hover {
+  background-image: url(../../../assets/icons/heart-hover.png);
+  opacity: 0.7;
+}
+
+.buttonLikeFilled {
+  background-image: url(../../../assets/icons/heart-filled.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: background-image 0.1s ease;
+}
+
+.buttonDetails {
+  background-image: url(../../../assets/icons/lupa-black.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
