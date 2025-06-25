@@ -4,7 +4,13 @@ import { ProductProps } from '@/types/types';
 import { useState } from 'react';
 import ProductDetailPopup from '../../modals/ProductDetailPopup';
 
-const Product = ({ product, isLikedList, setIsLikedList }: ProductProps) => {
+const Product = ({
+	product,
+	isLikedList,
+	setProducts,
+	setIsLikedList,
+	setAllProducts,
+}: ProductProps) => {
 	const [popupDetails, setPopupDetails] = useState<HTMLElement | boolean>(
 		false
 	);
@@ -32,6 +38,11 @@ const Product = ({ product, isLikedList, setIsLikedList }: ProductProps) => {
 		setPopupDetails(true);
 	};
 
+	const handleDeleteProduct = () => {
+		setAllProducts((prev) => prev.filter((item) => item.id !== product.id));
+		setProducts((prev) => prev.filter((item) => item.id !== product.id));
+	};
+
 	return (
 		<>
 			<li className={styles.card}>
@@ -46,6 +57,10 @@ const Product = ({ product, isLikedList, setIsLikedList }: ProductProps) => {
 					/>
 					<p className={styles.name}>{product.name}</p>
 					<p className={styles.price}>{showPrice(product.price)}</p>
+					<button
+						className={styles.deleteButton}
+						onClick={handleDeleteProduct}
+					/>
 				</div>
 				<div className={styles.buttonsContainer}>
 					<div className={styles.buttonContainer}>
