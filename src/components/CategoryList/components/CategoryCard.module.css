@@ -1,0 +1,32 @@
+.card {
+  font-size: 16px;
+  color: #000;
+  background-color: #fff;
+  padding: 5px 10px;
+  border: 1px solid #e1e7e9;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+.card.cardActive,
+.card:hover {
+  background-color: #346eee;
+  color: #fff;
+}
+
+.favoriteCard {
+  margin-left: auto;
+  background-color: transparent;
+  background-color: #ff4c4c;
+  color: #fff;
+  transition: background-color 0.1s ease;
+}
+
+.favoriteCard.cardActive {
+  background-color: #ff4c4c;
+}
+
+.favoriteCard:hover {
+  background-color: #ec3e3e;
+}
