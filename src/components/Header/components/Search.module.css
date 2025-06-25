@@ -1,0 +1,44 @@
+.container {
+  position: relative;
+}
+
+.input {
+  font-size: 16px;
+  padding: 10px;
+  padding-left: 38px;
+  border: 1px solid #e1e7e9;
+  border-radius: 8px;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #bababc;
+  font-size: 16px;
+}
+
+.button {
+  background-image: url(../../../assets/icons/lupa.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 20px;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: none;
+}
+
+@media screen and (max-width: 410px) {
+  .input {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .input {
+    width: 170px;
+  }
+}
