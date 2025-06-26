@@ -1,13 +1,19 @@
 .list {
-  list-style-type: none;
-  display: flex;
-  gap: 20px;
+	list-style-type: none;
+	display: flex;
+	gap: 20px;
 }
 
 @media screen and (max-width: 750px) {
-  .list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+	.list {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+}
+
+@media screen and (max-width: 630px) {
+	.list {
+		gap: 10px;
+	}
 }
