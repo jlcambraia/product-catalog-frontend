@@ -133,7 +133,7 @@ const CreateProductPopup = ({
 					<input
 						className={styles.input}
 						type='url'
-						placeholder='Link da Imagem do Produto'
+						placeholder='Link da imagem do produto'
 						onChange={handleImageInputChange}
 						value={imageInput}
 						required
