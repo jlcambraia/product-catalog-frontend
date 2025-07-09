@@ -7,6 +7,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='pt-BR'>
+			<head>
+				<title>Catálogo de Produtos</title>
+			</head>
 			<body>{children}</body>
 		</html>
 	);
