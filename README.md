@@ -1,6 +1,6 @@
-# Catálogo de Produtos
+# Catálogo de Produtos - Frontend
 
-Catálogo de produtos desenvolvido com **Next.js** e **TypeScript**, com filtros por categoria, sistema de favoritos, busca por texto e exibição de detalhes dos produtos. O projeto utiliza **dados mockados** no frontend, com planos de futura integração com um backend próprio.
+Catálogo de produtos desenvolvido com **Next.js** e **TypeScript**, com filtros por categoria, sistema de favoritos, busca por texto e exibição de detalhes dos produtos.
 
 Acesse a versão publicada: [Clique aqui para acessar](https://product-catalog-pink.vercel.app/)
 
@@ -62,7 +62,6 @@ yarn dev
 
 ## Possíveis Melhorias Futuras
 
-- Integração com um backend real (REST ou GraphQL)
 - Paginação ou carregamento infinito
 - Autenticação de usuários
 - Dark Mode
