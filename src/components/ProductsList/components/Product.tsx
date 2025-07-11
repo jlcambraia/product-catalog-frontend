@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { ProductProps } from '@/types/types';
 import { useState } from 'react';
 import ProductDetailPopup from '../../modals/ProductDetailPopup';
+import api from '@/utils/api/Api';
 
 const Product = ({
 	product,
@@ -15,11 +16,11 @@ const Product = ({
 		false
 	);
 
-	const isLiked = isLikedList.some((item) => item.id === product.id);
+	const isLiked = isLikedList.some((item) => item._id === product._id);
 
 	const handleLikeButton = (): void => {
 		if (isLiked) {
-			setIsLikedList((prev) => prev.filter((item) => item.id !== product.id));
+			setIsLikedList((prev) => prev.filter((item) => item._id !== product._id));
 		} else {
 			setIsLikedList((prev) => [...prev, product]);
 		}
@@ -38,9 +39,22 @@ const Product = ({
 		setPopupDetails(true);
 	};
 
-	const handleDeleteProduct = () => {
-		setAllProducts((prev) => prev.filter((item) => item.id !== product.id));
-		setProducts((prev) => prev.filter((item) => item.id !== product.id));
+	const handleDeleteProduct = async () => {
+		try {
+			const deletedProduct = await api.deleteProduct(product._id);
+
+			if (deletedProduct) {
+				setProducts((prevProducts) =>
+					prevProducts.filter((p) => p._id !== product._id)
+				);
+
+				setAllProducts((prevProducts) =>
+					prevProducts.filter((p) => p._id !== product._id)
+				);
+			}
+		} catch (err) {
+			console.error('Erro ao excluir produto:', err);
+		}
 	};
 
 	return (
