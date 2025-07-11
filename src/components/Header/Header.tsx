@@ -3,6 +3,7 @@ import Search from './components/Search';
 import Image from 'next/image';
 import logo from '../../../public/logo.png';
 import CreateProductPopup from '../modals/CreateProductPopup';
+import LinksPopup from '../modals/LinksPopup';
 import { useState } from 'react';
 
 import { HeaderProps } from '@/types/types';
@@ -15,14 +16,19 @@ const Header = ({
 	isLikedList,
 }: HeaderProps) => {
 	const [popupCreate, setPopupCreate] = useState<HTMLElement | boolean>(false);
+	const [popupLinks, setPopupLinks] = useState<HTMLElement | boolean>(false);
 
 	const favoriteButtonFilter = () => {
 		setProducts(isLikedList);
 		setActiveCategory('');
 	};
 
-	const handleOpenPopup = () => {
+	const handleOpenPopupCreate = () => {
 		setPopupCreate(true);
+	};
+
+	const handleOpenPopupLinks = () => {
+		setPopupLinks(true);
 	};
 
 	return (
@@ -38,12 +44,23 @@ const Header = ({
 				</div>
 				<div className={styles.buttonsAndSearchContainer}>
 					<div className={styles.buttonsContainer}>
-						<button className={styles.addButton} onClick={handleOpenPopup} />
+						<button
+							className={styles.linksButton}
+							onClick={handleOpenPopupLinks}
+						></button>
+						<button
+							className={styles.addButton}
+							onClick={handleOpenPopupCreate}
+						/>
 						<button
 							onClick={favoriteButtonFilter}
 							className={styles.favoriteButton}
 						/>
-						<Search setProducts={setProducts} />
+						<Search
+							products={products}
+							setProducts={setProducts}
+							setActiveCategory={setActiveCategory}
+						/>
 					</div>
 				</div>
 			</header>
@@ -55,6 +72,7 @@ const Header = ({
 					setAllProducts={setAllProducts}
 				/>
 			)}
+			{popupLinks && <LinksPopup setPopupLinks={setPopupLinks} />}
 		</>
 	);
 };
