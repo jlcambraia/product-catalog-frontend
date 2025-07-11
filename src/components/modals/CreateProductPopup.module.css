@@ -117,6 +117,19 @@
 	background-color: #2f63d2;
 }
 
+.submitButtonLoading {
+	cursor: not-allowed;
+	background-color: #a3a3a3;
+	border: none;
+	color: #fff;
+	padding: 20px 0;
+	border-radius: 8px;
+	margin-top: 30px;
+	font-size: 18px;
+	transition: background-color 0.1s ease;
+	width: 100%;
+}
+
 @media screen and (max-width: 750px) {
 	.container {
 		width: 500px;

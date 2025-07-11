@@ -15,6 +15,8 @@ const CreateProductPopup = ({
 	const [imageInput, setImageInput] = useState<string>('');
 	const [categoryInput, setCategoryInput] = useState<string>('');
 	const [stockInput, setStockInput] = useState<string>('');
+	const [createProductLoading, setCreateProductLoading] =
+		useState<boolean>(false);
 
 	const handleClosePopup = useCallback((): void => {
 		setPopupCreate(false);
@@ -82,6 +84,7 @@ const CreateProductPopup = ({
 
 	const handleInput = (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
+		setCreateProductLoading(true);
 
 		const createProduct = async () => {
 			try {
@@ -98,6 +101,8 @@ const CreateProductPopup = ({
 				handleClosePopup();
 			} catch (err) {
 				console.error('Erro ao criar produto:', err);
+			} finally {
+				setCreateProductLoading(false);
 			}
 		};
 
@@ -182,7 +187,15 @@ const CreateProductPopup = ({
 						required
 					/>
 
-					<button className={styles.submitButton}>Enviar</button>
+					<button
+						className={
+							createProductLoading
+								? styles.submitButtonLoading
+								: styles.submitButton
+						}
+					>
+						{createProductLoading ? 'Salvando...' : 'Enviar'}
+					</button>
 				</form>
 			</div>
 		</div>
