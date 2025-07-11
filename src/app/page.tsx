@@ -5,16 +5,32 @@ import Header from '@/components/Header/Header';
 import CategoryList from '@/components/CategoryList/CategoryList';
 import ProductsList from '@/components/ProductsList/ProductsList';
 import Footer from '@/components/Footer/Footer';
-import { useState } from 'react';
-import { productsMock } from '@/data/mocks/productsMock';
+import { useEffect, useState } from 'react';
 import { ProductsInterface, Category } from '@/types/types';
+import api from '@/utils/api/Api.js';
 
 export default function Home() {
-	const [products, setProducts] = useState<ProductsInterface[]>(productsMock);
-	const [allProducts, setAllProducts] =
-		useState<ProductsInterface[]>(productsMock);
+	const [products, setProducts] = useState<ProductsInterface[]>([]);
+	const [allProducts, setAllProducts] = useState<ProductsInterface[]>([]);
 	const [activeCategory, setActiveCategory] = useState<string>('Todos');
 	const [isLikedList, setIsLikedList] = useState<ProductsInterface[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			try {
+				const allProducts = await api.getProducts();
+				setProducts(allProducts.data);
+				setAllProducts(allProducts.data);
+			} catch (err) {
+				console.error('Erro ao buscar produtos:', err);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchProducts();
+	}, []);
 
 	const handleFilterByCategory = (category: string | Category): void => {
 		setActiveCategory(category.toString());
@@ -24,7 +40,7 @@ export default function Home() {
 			return;
 		}
 
-		const filteredProducts = allProducts.filter(
+		const filteredProducts = allProducts?.filter(
 			(product) => product.category === category
 		);
 
@@ -53,6 +69,7 @@ export default function Home() {
 						setIsLikedList={setIsLikedList}
 						setProducts={setProducts}
 						setAllProducts={setAllProducts}
+						isLoading={isLoading}
 					/>
 				</main>
 				<Footer />
