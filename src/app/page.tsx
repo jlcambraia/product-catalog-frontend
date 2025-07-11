@@ -5,6 +5,7 @@ import Header from '@/components/Header/Header';
 import CategoryList from '@/components/CategoryList/CategoryList';
 import ProductsList from '@/components/ProductsList/ProductsList';
 import Footer from '@/components/Footer/Footer';
+import WarningPopup from '@/components/modals/WarningPopup';
 import { useEffect, useState } from 'react';
 import { ProductsInterface, Category } from '@/types/types';
 import api from '@/utils/api/Api.js';
@@ -14,7 +15,14 @@ export default function Home() {
 	const [allProducts, setAllProducts] = useState<ProductsInterface[]>([]);
 	const [activeCategory, setActiveCategory] = useState<string>('Todos');
 	const [isLikedList, setIsLikedList] = useState<ProductsInterface[]>([]);
+	const [popupWarning, setPopupWarning] = useState<HTMLElement | boolean>(
+		false
+	);
 	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		setPopupWarning(true);
+	}, []);
 
 	useEffect(() => {
 		const fetchProducts = async () => {
@@ -73,6 +81,7 @@ export default function Home() {
 					/>
 				</main>
 				<Footer />
+				{popupWarning && <WarningPopup setPopupWarning={setPopupWarning} />}
 			</div>
 		</>
 	);
