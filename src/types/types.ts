@@ -9,13 +9,14 @@ export enum Category {
 }
 
 export interface ProductsInterface {
-	id: number;
+	_id: number;
 	name: string;
 	price: number;
 	image: StaticImageData | string;
 	description: string;
 	category: Category;
 	stock: number;
+	isLiked: boolean;
 }
 
 export type HeaderProps = {
@@ -27,7 +28,9 @@ export type HeaderProps = {
 };
 
 export type SearchProps = {
+	products: ProductsInterface[];
 	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	setActiveCategory: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type CategoryProps = {
@@ -37,6 +40,7 @@ export type CategoryProps = {
 	activeCategory?: string;
 	isLikedList?: ProductsInterface[];
 	isFavoriteCategory?: boolean;
+	products?: ProductsInterface[];
 	allProducts?: ProductsInterface[];
 };
 
@@ -46,6 +50,7 @@ export type ProductsListProps = {
 	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setIsLikedList: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	isLoading: boolean;
 };
 
 export type ProductProps = {
@@ -69,4 +74,8 @@ export type PopupCreateProps = {
 	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setPopupCreate: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
 	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+};
+
+export type PopupLinksProps = {
+	setPopupLinks: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
 };
