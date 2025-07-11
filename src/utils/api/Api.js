@@ -57,6 +57,18 @@ class Api {
 		);
 		return await this._handleResponse(toggleLike);
 	}
+
+	async updateProductStock(productId, newStock) {
+		const res = await this._makeRequest(
+			`${this._baseUrl}/products/${productId}/stock`,
+			{
+				method: 'PATCH',
+				headers: this._headers,
+				body: JSON.stringify({ stock: newStock }),
+			}
+		);
+		return await this._handleResponse(res);
+	}
 }
 
 const apiConfig = {
