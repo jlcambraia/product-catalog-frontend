@@ -2,12 +2,12 @@ import styles from './CreateProductPopup.module.css';
 import { PopupCreateProps, Category } from '@/types/types';
 import { useEffect, useCallback, useState } from 'react';
 import { MouseEvent } from 'react';
+import api from '@/utils/api/Api';
 
 const CreateProductPopup = ({
-	products,
-	setAllProducts,
 	setPopupCreate,
 	setProducts,
+	setAllProducts,
 }: PopupCreateProps) => {
 	const [nameInput, setNameInput] = useState<string>('');
 	const [priceInput, setPriceInput] = useState<string>('');
@@ -83,20 +83,25 @@ const CreateProductPopup = ({
 	const handleInput = (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 
-		const newProduct = {
-			id: products.length + 1,
-			name: nameInput,
-			price: parseFloat(priceInput),
-			description: descriptionInput,
-			image: imageInput,
-			category: categoryInput as Category,
-			isLiked: [],
-			stock: parseInt(stockInput),
+		const createProduct = async () => {
+			try {
+				const newProduct = await api.createProduct({
+					name: nameInput,
+					price: parseFloat(priceInput),
+					description: descriptionInput,
+					image: imageInput,
+					category: categoryInput as Category,
+					stock: parseInt(stockInput),
+				});
+				setProducts((prev) => [newProduct.data, ...prev]);
+				setAllProducts((prev) => [newProduct.data, ...prev]);
+				handleClosePopup();
+			} catch (err) {
+				console.error('Erro ao criar produto:', err);
+			}
 		};
 
-		setAllProducts((prev) => [newProduct, ...prev]);
-		setProducts((prev) => [newProduct, ...prev]);
-		handleClosePopup();
+		createProduct();
 	};
 
 	return (
@@ -105,23 +110,61 @@ const CreateProductPopup = ({
 				<button onClick={handleClosePopup} className={styles.button} />
 				<h2 className={styles.title}>Adicione um produto</h2>
 				<form className={styles.form} onSubmit={handleInput}>
-					<input
-						className={styles.input}
-						type='text'
-						placeholder='Nome do produto'
-						onChange={handleNameInputChange}
-						value={nameInput}
-						required
-					/>
-					<input
-						className={styles.input}
-						type='number'
-						placeholder='Preço do produto'
-						onChange={handlePriceInputChange}
-						value={priceInput}
-						required
-					/>
-
+					<fieldset className={styles.fieldset}>
+						<input
+							className={styles.input}
+							type='text'
+							placeholder='Nome do produto'
+							onChange={handleNameInputChange}
+							value={nameInput}
+							required
+						/>
+						<input
+							className={styles.input}
+							type='number'
+							placeholder='Preço do produto'
+							onChange={handlePriceInputChange}
+							value={priceInput}
+							required
+						/>
+					</fieldset>
+					<fieldset className={styles.fieldset}>
+						<select
+							className={`${styles.select} ${
+								categoryInput ? styles.selected : ''
+							}`}
+							value={categoryInput}
+							onChange={handleCategoryInputChange}
+							required
+						>
+							<option value='' disabled>
+								Selecione uma categoria
+							</option>
+							<option className={styles.option} value='ACESSÓRIOS'>
+								Acessórios
+							</option>
+							<option className={styles.option} value='MÓVEIS'>
+								Móveis
+							</option>
+							<option className={styles.option} value='ELETRÔNICOS'>
+								Eletrônicos
+							</option>
+							<option className={styles.option} value='ROUPAS'>
+								Roupas
+							</option>
+							<option className={styles.option} value='OUTROS'>
+								Outros
+							</option>
+						</select>
+						<input
+							className={styles.input}
+							type='number'
+							placeholder='Estoque do produto'
+							onChange={handleStockInputChange}
+							value={stockInput}
+							required
+						/>
+					</fieldset>
 					<input
 						className={styles.input}
 						type='text'
@@ -138,41 +181,7 @@ const CreateProductPopup = ({
 						value={imageInput}
 						required
 					/>
-					<select
-						className={`${styles.select} ${
-							categoryInput ? styles.selected : ''
-						}`}
-						value={categoryInput}
-						onChange={handleCategoryInputChange}
-						required
-					>
-						<option value='' disabled>
-							Selecione uma categoria
-						</option>
-						<option className={styles.option} value='ACESSÓRIOS'>
-							Acessórios
-						</option>
-						<option className={styles.option} value='MÓVEIS'>
-							Móveis
-						</option>
-						<option className={styles.option} value='ELETRÔNICOS'>
-							Eletrônicos
-						</option>
-						<option className={styles.option} value='ROUPAS'>
-							Roupas
-						</option>
-						<option className={styles.option} value='OUTROS'>
-							Outros
-						</option>
-					</select>
-					<input
-						className={styles.input}
-						type='number'
-						placeholder='Estoque do produto'
-						onChange={handleStockInputChange}
-						value={stockInput}
-						required
-					/>
+
 					<button className={styles.submitButton}>Enviar</button>
 				</form>
 			</div>
