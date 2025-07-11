@@ -86,3 +86,7 @@ export type PopupDeleteProps = {
 	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setPopupDelete: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
 };
+
+export type PopupWarningProps = {
+	setPopupWarning: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
+};
