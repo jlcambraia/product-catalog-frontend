@@ -33,13 +33,21 @@ const LinksPopup = ({ setPopupLinks }: PopupLinksProps) => {
 		}
 	};
 
-	const links = ['https://seusite.com/abc123', 'https://seusite.com/outro'];
+	const links = [
+		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/bag.png`,
+		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/bag-2.png`,
+		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/chair.png`,
+		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/monitor.png`,
+		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/phone.png`,
+		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/sneakers.png`,
+		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/tshirt.png`,
+	];
 
 	const copyText = async (text: string, index: number) => {
 		try {
 			await navigator.clipboard.writeText(text);
 			setCopiedIndex(index);
-			setTimeout(() => setCopiedIndex(null), 2000); // Volta para 📋 após 2s
+			setTimeout(() => setCopiedIndex(null), 2000);
 		} catch (err) {
 			console.error('Erro ao copiar:', err);
 		}
