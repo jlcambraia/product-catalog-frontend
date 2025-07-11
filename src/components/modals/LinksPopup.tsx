@@ -58,7 +58,7 @@ const LinksPopup = ({ setPopupLinks }: PopupLinksProps) => {
 			<div className={styles.container}>
 				<button className={styles.button} onClick={handleClosePopup} />
 				<h2 className={styles.title}>
-					Copie o link de imagem para criar seu produto!
+					Copie o link de uma imagem para criar seu produto!
 				</h2>
 
 				{links.map((link, index) => (
