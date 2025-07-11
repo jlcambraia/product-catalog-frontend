@@ -10,7 +10,7 @@ const ProductDetailPopup = ({
 	handleLikeButton,
 	isLikedList,
 }: PopupDetailsProps) => {
-	const isLiked = isLikedList.some((item) => item.id === product.id);
+	const isLiked = isLikedList.some((item) => item._id === product._id);
 
 	const handleClosePopup = useCallback((): void => {
 		setPopupDetails(false);
