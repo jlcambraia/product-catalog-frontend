@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { ProductProps } from '@/types/types';
 import { useState } from 'react';
 import ProductDetailPopup from '../../modals/ProductDetailPopup';
-import api from '@/utils/api/Api';
+import DeleteConfirmationPopup from '@/components/modals/DeleteConfirmationPopup';
 
 const Product = ({
 	product,
@@ -15,6 +15,7 @@ const Product = ({
 	const [popupDetails, setPopupDetails] = useState<HTMLElement | boolean>(
 		false
 	);
+	const [popupDelete, setPopupDelete] = useState<HTMLElement | boolean>(false);
 
 	const isLiked = isLikedList.some((item) => item._id === product._id);
 
@@ -35,26 +36,12 @@ const Product = ({
 		return 'R$ ' + value.toFixed(2).replace('.', ',');
 	};
 
-	const handleOpenPopup = () => {
+	const handleOpenDetailPopup = () => {
 		setPopupDetails(true);
 	};
 
-	const handleDeleteProduct = async () => {
-		try {
-			const deletedProduct = await api.deleteProduct(product._id);
-
-			if (deletedProduct) {
-				setProducts((prevProducts) =>
-					prevProducts.filter((p) => p._id !== product._id)
-				);
-
-				setAllProducts((prevProducts) =>
-					prevProducts.filter((p) => p._id !== product._id)
-				);
-			}
-		} catch (err) {
-			console.error('Erro ao excluir produto:', err);
-		}
+	const handleOpenDeletePopup = () => {
+		setPopupDelete(true);
 	};
 
 	return (
@@ -73,7 +60,7 @@ const Product = ({
 					<p className={styles.price}>{showPrice(product.price)}</p>
 					<button
 						className={styles.deleteButton}
-						onClick={handleDeleteProduct}
+						onClick={handleOpenDeletePopup}
 					/>
 				</div>
 				<div className={styles.buttonsContainer}>
@@ -86,7 +73,7 @@ const Product = ({
 					<div className={styles.buttonContainer}>
 						<button
 							className={styles.buttonDetails}
-							onClick={handleOpenPopup}
+							onClick={handleOpenDetailPopup}
 						/>
 					</div>
 				</div>
@@ -98,6 +85,14 @@ const Product = ({
 					product={product}
 					isLikedList={isLikedList}
 					setIsLikedList={setIsLikedList}
+				/>
+			)}
+			{popupDelete && (
+				<DeleteConfirmationPopup
+					setPopupDelete={setPopupDelete}
+					product={product}
+					setProducts={setProducts}
+					setAllProducts={setAllProducts}
 				/>
 			)}
 		</>
