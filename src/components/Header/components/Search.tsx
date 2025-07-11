@@ -4,9 +4,7 @@ import styles from './Search.module.css';
 import { SearchProps } from '@/types/types';
 import { useState } from 'react';
 
-import { productsMock } from '@/data/mocks/productsMock';
-
-const Search = ({ setProducts }: SearchProps) => {
+const Search = ({ products, setProducts, setActiveCategory }: SearchProps) => {
 	const [inputValue, setInputValue] = useState<string>('');
 
 	const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +15,7 @@ const Search = ({ setProducts }: SearchProps) => {
 		evt.preventDefault();
 		const input = inputValue.toLowerCase();
 
-		const result = productsMock.filter(
+		const result = products.filter(
 			(product) =>
 				product.name.toLowerCase().includes(input) ||
 				product.description.toLowerCase().includes(input) ||
@@ -25,6 +23,7 @@ const Search = ({ setProducts }: SearchProps) => {
 				String(product.price).toLowerCase().includes(input)
 		);
 		setInputValue('');
+		setActiveCategory('');
 		setProducts(result);
 	};
 
