@@ -1,5 +1,4 @@
 import styles from './ProductsList.module.css';
-
 import Product from './components/Product';
 import { ProductsListProps } from '@/types/types';
 
@@ -9,7 +8,17 @@ const ProductsList = ({
 	setProducts,
 	setIsLikedList,
 	setAllProducts,
+	isLoading,
 }: ProductsListProps) => {
+	if (isLoading) {
+		return (
+			<div className={styles.loaderContainer}>
+				<div className={styles.loader}></div>
+				<span className={styles.loaderText}>Carregando produtos...</span>
+			</div>
+		);
+	}
+
 	if (products.length === 0) {
 		return (
 			<p className={styles.emptyMessage}>
@@ -22,7 +31,7 @@ const ProductsList = ({
 		<ul className={styles.list}>
 			{products.map((product) => (
 				<Product
-					key={product.id}
+					key={product._id}
 					product={product}
 					isLikedList={isLikedList}
 					setProducts={setProducts}
