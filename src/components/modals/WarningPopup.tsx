@@ -36,8 +36,8 @@ const WarningPopup = ({ setPopupWarning }: PopupWarningProps) => {
 				<div className={styles.container}>
 					<button className={styles.button} onClick={handleClosePopup} />
 					<p className={styles.text}>
-						A API responsável por Registro, Login e Salvamento de Artigos está
-						hospedada em um servidor gratuito que{' '}
+						A API responsável por buscar e salvar produtos está hospedada em um
+						servidor gratuito que{' '}
 						<span className={styles.textBold}>
 							pode entrar em hibernação após um período de inatividade.
 						</span>
@@ -46,16 +46,14 @@ const WarningPopup = ({ setPopupWarning }: PopupWarningProps) => {
 							<span className='warning-popup__font-weight_bold'>
 								primeira utilização
 							</span>{' '}
-							(como durante o registro) pode ser mais lento. Após esse primeiro
-							acesso, a API volta a responder normalmente.
+							(como carregar os produtos) pode ser mais lento. Após esse
+							primeiro acesso,{' '}
+							<span className={styles.textBold}>
+								a API volta a responder normalmente
+							</span>
+							.
 						</span>
-						<span className={styles.textParagraph}>
-							Já a API utilizada para{' '}
-							<span className={styles.textBold}>busca de artigos</span> é
-							fornecida por terceiros e permanece ativa continuamente,
-							garantindo respostas rápidas desde o início.
-						</span>{' '}
-						<span className={styles.textParagraph}>
+						<span className={`${styles.textParagraph} ${styles.textBold}`}>
 							Agradeço a todos pela compreensão.
 						</span>
 					</p>
