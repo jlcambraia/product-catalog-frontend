@@ -28,8 +28,12 @@ export default function Home() {
 		const fetchProducts = async () => {
 			try {
 				const allProducts = await api.getProducts();
-				setProducts(allProducts.data);
-				setAllProducts(allProducts.data);
+
+				const reversedForProducts = [...allProducts.data].reverse();
+				const reversedForAllProducts = [...allProducts.data].reverse();
+
+				setProducts(reversedForProducts);
+				setAllProducts(reversedForAllProducts);
 			} catch (err) {
 				console.error('Erro ao buscar produtos:', err);
 			} finally {
