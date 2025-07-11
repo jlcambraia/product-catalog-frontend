@@ -58,7 +58,6 @@ const Header = ({
 							className={styles.favoriteButton}
 						/>
 						<Search
-							products={products}
 							allProducts={allProducts}
 							setProducts={setProducts}
 							setActiveCategory={setActiveCategory}

@@ -5,7 +5,6 @@ import { SearchProps } from '@/types/types';
 import { useState } from 'react';
 
 const Search = ({
-	products,
 	allProducts,
 	setProducts,
 	setActiveCategory,
