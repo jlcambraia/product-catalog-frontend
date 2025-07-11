@@ -79,3 +79,10 @@ export type PopupCreateProps = {
 export type PopupLinksProps = {
 	setPopupLinks: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
 };
+
+export type PopupDeleteProps = {
+	product: ProductsInterface;
+	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	setPopupDelete: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
+};
