@@ -21,6 +21,7 @@ export interface ProductsInterface {
 
 export type HeaderProps = {
 	products: ProductsInterface[];
+	allProducts: ProductsInterface[];
 	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setActiveCategory: React.Dispatch<React.SetStateAction<string>>;
@@ -29,6 +30,7 @@ export type HeaderProps = {
 
 export type SearchProps = {
 	products: ProductsInterface[];
+	allProducts: ProductsInterface[];
 	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setActiveCategory: React.Dispatch<React.SetStateAction<string>>;
 };

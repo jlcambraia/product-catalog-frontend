@@ -10,6 +10,7 @@ import { HeaderProps } from '@/types/types';
 
 const Header = ({
 	products,
+	allProducts,
 	setProducts,
 	setAllProducts,
 	setActiveCategory,
@@ -58,6 +59,7 @@ const Header = ({
 						/>
 						<Search
 							products={products}
+							allProducts={allProducts}
 							setProducts={setProducts}
 							setActiveCategory={setActiveCategory}
 						/>

@@ -60,6 +60,7 @@ export default function Home() {
 			<div className={styles.container}>
 				<Header
 					products={products}
+					allProducts={allProducts}
 					setProducts={setProducts}
 					setAllProducts={setAllProducts}
 					setActiveCategory={setActiveCategory}

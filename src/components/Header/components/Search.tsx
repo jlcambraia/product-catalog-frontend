@@ -4,7 +4,12 @@ import styles from './Search.module.css';
 import { SearchProps } from '@/types/types';
 import { useState } from 'react';
 
-const Search = ({ products, setProducts, setActiveCategory }: SearchProps) => {
+const Search = ({
+	products,
+	allProducts,
+	setProducts,
+	setActiveCategory,
+}: SearchProps) => {
 	const [inputValue, setInputValue] = useState<string>('');
 
 	const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +20,7 @@ const Search = ({ products, setProducts, setActiveCategory }: SearchProps) => {
 		evt.preventDefault();
 		const input = inputValue.toLowerCase();
 
-		const result = products.filter(
+		const result = allProducts.filter(
 			(product) =>
 				product.name.toLowerCase().includes(input) ||
 				product.description.toLowerCase().includes(input) ||
