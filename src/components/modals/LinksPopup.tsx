@@ -57,7 +57,9 @@ const LinksPopup = ({ setPopupLinks }: PopupLinksProps) => {
 		<div className={styles.popup} onClick={handleOverlayClick} data-popup>
 			<div className={styles.container}>
 				<button className={styles.button} onClick={handleClosePopup} />
-				<h2 className={styles.title}>Copie um link para criar seu produto!</h2>
+				<h2 className={styles.title}>
+					Copie o link de imagem para criar seu produto!
+				</h2>
 
 				{links.map((link, index) => (
 					<div key={index} className={styles.linkWrapper}>
