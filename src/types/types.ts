@@ -9,7 +9,7 @@ export enum Category {
 }
 
 export interface ProductsInterface {
-	_id: number;
+	_id: string;
 	name: string;
 	price: number;
 	image: StaticImageData | string;
@@ -56,10 +56,10 @@ export type ProductsListProps = {
 
 export type ProductProps = {
 	product: ProductsInterface;
-	isLikedList: ProductsInterface[];
-	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
-	setIsLikedList: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
-	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	isLikedList?: ProductsInterface[];
+	setProducts?: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	setIsLikedList?: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	setAllProducts?: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 };
 
 export type PopupDetailsProps = {
