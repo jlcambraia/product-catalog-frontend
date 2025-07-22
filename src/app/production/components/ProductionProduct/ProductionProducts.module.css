@@ -1,0 +1,152 @@
+.card {
+	background-color: #fff;
+	border-radius: 20px;
+	border: 1px solid #e1e7e9;
+	list-style-type: none;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	padding: 10px;
+}
+
+.divisory {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-weight: 500;
+	width: calc(100% / 6);
+	min-width: 150px;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.image {
+	object-fit: contain;
+	object-position: center;
+	width: 100%;
+	max-width: 150px;
+	height: auto;
+	align-self: center;
+}
+
+.text {
+	display: flex;
+	align-items: flex-end;
+	font-weight: normal;
+	padding: 10px 10px 10px 0;
+	margin: 0;
+}
+
+.form {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.input {
+	border: none;
+	background-color: #f9f9f9;
+	outline: none;
+	width: 100px;
+	font-size: 16px;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.input::placeholder {
+	font-size: 16px;
+}
+
+.button {
+	background-image: url(../../../../assets/icons/add-icon.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 18px;
+	height: 18px;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.loader {
+	width: 20px;
+	height: 20px;
+	border: 5px solid #eee;
+	border-top: 5px solid #cbcaca;
+	background-color: #fff;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media screen and (max-width: 1088px) {
+	.divisory {
+		width: fit-content;
+		max-width: fit-content;
+		min-width: fit-content;
+	}
+
+	.image {
+		max-width: 100px;
+	}
+}
+
+@media screen and (max-width: 878px) {
+	.card {
+		width: 300px;
+		margin: 0 auto;
+	}
+
+	.container {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto;
+	}
+
+	.divisory {
+		padding: 10px;
+		gap: 8px;
+		align-items: center;
+		border-bottom: 1px solid #cbcaca;
+		width: 80%;
+		min-width: none;
+		max-width: none;
+	}
+
+	.divisory:last-child {
+		border-bottom: none;
+	}
+
+	.image {
+		width: 110px;
+	}
+
+	.text {
+		margin: 0 auto;
+		padding: 0px;
+	}
+
+	.input {
+		width: 100px;
+		padding: 8px;
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 370px) {
+	.card {
+		width: 260px;
+	}
+}
