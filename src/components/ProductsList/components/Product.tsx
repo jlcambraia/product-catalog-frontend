@@ -4,6 +4,7 @@ import { ProductProps } from '@/types/types';
 import { useState } from 'react';
 import ProductDetailPopup from '../../modals/ProductDetailPopup';
 import DeleteConfirmationPopup from '@/components/modals/DeleteConfirmationPopup';
+import { showPrice } from '@/utils/validators/validators';
 
 const Product = ({
 	product,
@@ -17,6 +18,9 @@ const Product = ({
 	);
 	const [popupDelete, setPopupDelete] = useState<HTMLElement | boolean>(false);
 
+	if (!isLikedList || !setIsLikedList || !setAllProducts || !setProducts) {
+		return;
+	}
 	const isLiked = isLikedList.some((item) => item._id === product._id);
 
 	const handleLikeButton = (): void => {
@@ -25,15 +29,6 @@ const Product = ({
 		} else {
 			setIsLikedList((prev) => [...prev, product]);
 		}
-	};
-
-	const showPrice = (price: number | string): string => {
-		const normalized =
-			typeof price === 'string' ? price.replace(',', '.') : price;
-		const value =
-			typeof normalized === 'number' ? normalized : parseFloat(normalized);
-
-		return 'R$ ' + value.toFixed(2).replace('.', ',');
 	};
 
 	const handleOpenDetailPopup = () => {
