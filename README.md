@@ -1,76 +1,74 @@
-# Catálogo de Produtos - Frontend
+# Product Catalog — Frontend
 
-Catálogo de produtos desenvolvido com **Next.js** e **TypeScript**, com filtros por categoria, sistema de favoritos, busca por texto e exibição de detalhes dos produtos e controle de estoque conectado ao backend.
+Responsive product catalog built with **Next.js 15, React 19, and TypeScript**. It connects to a separate REST API for product records and inventory operations.
 
-Acesse a versão publicada: [Clique aqui para acessar](https://product-catalog-pink.vercel.app/)
+**[Live demo](https://product-catalog-pink.vercel.app/)** · **[Backend repository](https://github.com/jlcambraia/product-catalog-backend)**
 
----
+## Features
 
-## Funcionalidades
+- Browse products and view details
+- Search by product name, description, category, or price
+- Filter products by category
+- Add and delete products
+- Mark favorites in the current React session (not persisted to the database)
+- Record inventory consumption on a dedicated production page
+- Responsive interface
 
-- Filtro por **categorias**
-- Busca por **termo no input**
-- Exibição de **lista de produtos**
-- Marcar produtos como **favoritos**
-- Exibir produtos **favoritos**
-- Visualização de **detalhes** do produto via botão de lupa
-- Inclusão de **novos produtos**
-- Remoção de **produtos**
-- Página de **produção** para **consumo de estoque**
-- Interface responsiva e moderna
-- Desenvolvido com **Next.js + TypeScript**
+## Tech stack
 
----
+Next.js 15 · React 19 · TypeScript · CSS Modules · REST API · Vercel
 
-## Tecnologias Utilizadas
+## Architecture
 
-- [Next.js](https://nextjs.org/)
-- [React](https://reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Vercel](https://vercel.com/) (deploy)
-- CSS Modules
-
----
-
-## Como Rodar Localmente
-
-1. **Clone o repositório**
-
-```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+```text
+Next.js / React frontend
+          |
+       REST API
+          |
+Node.js / Express backend
+          |
+        MongoDB
 ```
 
-2. **Instale as dependências**
+## Run locally
+
+Requires Node.js, npm, and the [Product Catalog backend](https://github.com/jlcambraia/product-catalog-backend) running locally or remotely.
 
 ```bash
+git clone https://github.com/jlcambraia/product-catalog-frontend.git
+cd product-catalog-frontend
 npm install
-# ou
-yarn install
 ```
 
-3. **Inicie o servidor de desenvolvimento**
+Create `.env.local` at the project root:
+
+```env
+NEXT_PUBLIC_MAINAPI_BASE_URL=http://localhost:3001
+```
+
+Change the URL to match your backend configuration.
 
 ```bash
 npm run dev
-# ou
-yarn dev
 ```
 
-4. **Acesse no navegador: http://localhost:3000**
+Visit http://localhost:3000.
 
----
+To create and run a production build:
 
-## Possíveis Melhorias Futuras
+```bash
+npm run build
+npm run start
+```
 
-- Paginação ou carregamento infinito
-- Autenticação de usuários
-- Dark Mode
-- Dashboard administrativo com métricas de estoque
-- Integração com carrinho de compras
+## Potential improvements
 
----
+- Pagination or infinite scrolling
+- User authentication and authorization
+- Persistent favorites
+- Inventory metrics dashboard
+- Automated tests
 
-## Autor
+## Author
 
-Desenvolvido por João Luiz Cambraia
+**João Luiz Cambraia** · [GitHub](https://github.com/jlcambraia) · [LinkedIn](https://www.linkedin.com/in/joaoluizcambraia/)
