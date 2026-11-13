@@ -27,6 +27,8 @@ export type HeaderProps = {
 	setActiveCategory: React.Dispatch<React.SetStateAction<string>>;
 	isLikedList: ProductsInterface[];
 	onProductCreated: (product: ProductsInterface) => void;
+	onRestoreDemo: () => Promise<void>;
+	isRestoringDemo: boolean;
 };
 
 export type SearchProps = {
