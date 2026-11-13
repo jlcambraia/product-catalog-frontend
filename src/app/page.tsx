@@ -85,7 +85,7 @@ export default function Home() {
 						setProducts={setProducts}
 						setAllProducts={setAllProducts}
 						isLoading={isLoading}
-					/>
+					/>}
 				</main>
 				<Footer />
 				{popupWarning && <WarningPopup setPopupWarning={setPopupWarning} />}
