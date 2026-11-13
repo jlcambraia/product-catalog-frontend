@@ -33,7 +33,8 @@ const Header = ({
   }, [restoreDialogOpen]);
 
   const favoriteButtonFilter = () => {
-    setProducts(isLikedList);
+    const availableIds = new Set(allProducts.map((item) => item._id));
+    setProducts(isLikedList.filter((item) => availableIds.has(item._id)));
     setActiveCategory('');
   };
 
