@@ -104,3 +104,19 @@
 .button { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; }
 .linkText { overflow-wrap: anywhere; min-width: 0; }
 @media(max-width:500px) { .container { margin: 0; padding: 40px 16px 20px; } .button { top: 12px; right: 12px; } }
+
+.button {
+  background-image: none;
+  background-color: #f1f5f9;
+  color: #334155;
+  font-family: Arial, sans-serif;
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+}
+.button:hover, .button:focus-visible { background-color: #e2e8f0; }
