@@ -55,6 +55,9 @@ const DeleteConfirmationPopup = ({
 				setAllProducts((prevProducts) =>
 					prevProducts.filter((p) => p._id !== product._id)
 				);
+				setIsLikedList((prevFavorites) =>
+					prevFavorites.filter((p) => p._id !== product._id)
+				);
           handleClosePopup();
 			}
 		} catch (err) {
