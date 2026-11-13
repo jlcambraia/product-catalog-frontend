@@ -1,84 +1,18 @@
 class Api {
-	constructor({ baseUrl, headers, makeRequest }) {
-		this._baseUrl = baseUrl;
-		this._headers = headers;
-		this._makeRequest = makeRequest;
-	}
-
-	_handleResponse(res) {
-		return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-	}
-
-	async getProducts() {
-		const res = await this._makeRequest(`${this._baseUrl}/products`, {
-			method: 'GET',
-			headers: this._headers,
-		});
-		return await this._handleResponse(res);
-	}
-
-	async createProduct(product) {
-		const newProduct = await this._makeRequest(`${this._baseUrl}/products`, {
-			method: 'POST',
-			headers: this._headers,
-			body: JSON.stringify({
-				name: product.name,
-				price: product.price,
-				description: product.description,
-				image: product.image,
-				category: product.category,
-				stock: product.stock,
-			}),
-		});
-		return await this._handleResponse(newProduct);
-	}
-
-	async deleteProduct(productId) {
-		const deletedProduct = await this._makeRequest(
-			`${this._baseUrl}/products/${productId}`,
-			{
-				method: 'DELETE',
-				headers: this._headers,
-			}
-		);
-		return await this._handleResponse(deletedProduct);
-	}
-
-	async toggleLikeProduct(productId, currentIsLiked) {
-		const toggleLike = await this._makeRequest(
-			`${this._baseUrl}/products/${productId}`,
-			{
-				method: 'PATCH',
-				headers: this._headers,
-				body: JSON.stringify({
-					isLiked: !currentIsLiked,
-				}),
-			}
-		);
-		return await this._handleResponse(toggleLike);
-	}
-
-	async updateProductStock(productId, newStock) {
-		const res = await this._makeRequest(
-			`${this._baseUrl}/products/${productId}/stock`,
-			{
-				method: 'PATCH',
-				headers: this._headers,
-				body: JSON.stringify({ stock: newStock }),
-			}
-		);
-		return await this._handleResponse(res);
-	}
+  async _request(path, options = {}) {
+    const res = await fetch(`/api${path}`, {
+      ...options,
+      headers: { "Content-Type": "application/json", ...options.headers },
+      cache: "no-store",
+    });
+    let data;
+    try { data = await res.json(); } catch { data = { message: "Invalid server response" }; }
+    if (!res.ok) throw new Error(data.message || `Request failed: ${res.status}`);
+    return data;
+  }
+  getProducts() { return this._request("/products"); }
+  createProduct(product) { return this._request("/products", { method: "POST", body: JSON.stringify(product) }); }
+  deleteProduct(id) { return this._request(`/products/${id}`, { method: "DELETE", body: "{}" }); }
+  updateProductStock(id, stock) { return this._request(`/products/${id}/stock`, { method: "PATCH", body: JSON.stringify({ stock }) }); }
 }
-
-const apiConfig = {
-	baseUrl: process.env.NEXT_PUBLIC_MAINAPI_BASE_URL,
-	headers: {
-		'Content-Type': 'application/json',
-	},
-	makeRequest: (...args) => fetch(...args),
-};
-
-const api = new Api(apiConfig);
-
-export default api;
+export default new Api();
