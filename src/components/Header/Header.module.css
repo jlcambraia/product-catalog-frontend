@@ -125,3 +125,39 @@
   .buttonsContainer { flex-wrap: wrap; justify-content: center; }
   .buttonsAndSearchContainer { width: 100%; justify-content: center; }
 }
+
+/* Demo admin actions: explicit labels instead of almost invisible 22px icons. */
+.buttonsAndSearchContainer { min-width: 0; }
+.buttonsContainer { height: auto; min-height: 40px; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+.linksButton, .addButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: auto;
+  height: 38px;
+  min-height: 38px;
+  padding: 0 14px;
+  margin: 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #fff;
+  color: #26344a;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  animation: none;
+}
+.linksButton:hover { background: #f1f5f9; }
+.addButton { background: #346eee; color: #fff; border-color: #346eee; }
+.addButton:hover { background: #2f63d2; }
+.favoriteButton { flex: 0 0 32px; height: 32px; }
+@media screen and (max-width: 950px) {
+  .header { flex-wrap: wrap; gap: 14px; }
+  .buttonsAndSearchContainer { flex: 1 1 auto; justify-content: flex-end; }
+}
+@media screen and (max-width: 750px) {
+  .buttonsAndSearchContainer { justify-content: center; }
+  .buttonsContainer { justify-content: center; }
+}
