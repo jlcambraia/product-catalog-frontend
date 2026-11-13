@@ -1,183 +1,241 @@
 .header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 30px 0;
+  padding: 22px 0 18px;
 }
-
-.container {
-	display: flex;
-	align-items: center;
-	gap: 10px;
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  min-width: 0;
 }
-
-.title {
-	font-size: 32px;
-	font-weight: 700;
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
-
-.buttonsAndSearchContainer {
-	display: flex;
-	align-items: center;
-}
-
 .image {
-	width: 36px;
-	height: 100%;
-	display: block;
-	padding-bottom: 10px;
+  display: block;
+  width: 40px;
+  height: auto;
+  object-fit: contain;
 }
-
-.buttonsContainer {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	width: 100%;
-	height: 28px;
+.title {
+  color: #18233a;
+  font-size: clamp(24px, 2.8vw, 30px);
+  font-weight: 750;
+  letter-spacing: -.04em;
+  white-space: nowrap;
 }
-
-.linksButton {
-	background-image: url(../../assets/icons/links-icon.png);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	margin-left: auto;
-	width: 22px;
-	height: 100%;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-
-	animation: pulinho 3s ease-in-out infinite;
+.utilities {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
 }
-
-@keyframes pulinho {
-	0%,
-	10% {
-		transform: translateY(0);
-	}
-	5% {
-		transform: translateY(-5px);
-	}
-	100% {
-		transform: translateY(0);
-	}
+.search {
+  width: min(100%, 310px);
+  flex: 1 1 210px;
+  min-width: 140px;
 }
-
-.addButton {
-	background-image: url(../../assets/icons/add-icon.svg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	margin-left: auto;
-	width: 22px;
-	height: 100%;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-}
-
-.favoriteButton {
-	background-image: url(../../assets/icons/heart-hover.png);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	width: 32px;
-	height: 100%;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-	filter: grayscale(100%);
-	opacity: 0.25;
-}
-
-@media screen and (max-width: 750px) {
-	.header {
-		flex-direction: column;
-	}
-
-	.container {
-		margin-bottom: 15px;
-	}
-}
-
-/* Phase 1: keep the original icon/search layout while adding a compact admin link. */
-.authButton {
+.favoriteButton, .authButton {
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  min-height: 32px;
-  padding: 5px 12px;
-  border: 1px solid #d5d5d5;
-  border-radius: 8px;
+  gap: 7px;
+  border: 1px solid #e0e6ef;
+  border-radius: 10px;
   background: #fff;
-  color: #252525;
-  font: inherit;
-  font-size: 13px;
+  color: #304058;
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
+  padding: 0 15px;
+  flex-shrink: 0;
   cursor: pointer;
 }
-.authButton:hover { background: #f0f0f0; }
-.buttonsContainer { height: auto; min-height: 32px; }
-@media screen and (max-width: 540px) {
-  .buttonsContainer { flex-wrap: wrap; justify-content: center; }
-  .buttonsAndSearchContainer { width: 100%; justify-content: center; }
+.favoriteButton span:first-child {
+  font-size: 18px;
+  color: #de7183;
+  line-height: 1;
 }
-
-/* Demo admin actions: explicit labels instead of almost invisible 22px icons. */
-.buttonsAndSearchContainer { min-width: 0; }
-.buttonsContainer { height: auto; min-height: 40px; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
-.linksButton, .addButton {
-  display: inline-flex;
+.favoriteButton:hover, .authButton:hover {
+  background: #f4f7fb;
+  border-color: #cbd5e1;
+}
+.adminBar {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: auto;
-  height: 38px;
-  min-height: 38px;
-  padding: 0 14px;
-  margin: 0;
-  border: 1px solid #cbd5e1;
-  border-radius: 9px;
+  justify-content: space-between;
+  gap: 22px;
+  margin-top: 21px;
+  padding: 18px 20px;
   background: #fff;
-  color: #26344a;
-  font-size: 13px;
-  font-weight: 600;
-  white-space: nowrap;
-  cursor: pointer;
-  animation: none;
+  border: 1px solid #e7eaf0;
+  border-radius: 14px;
+  box-shadow: 0 5px 18px rgba(29, 49, 80, .035);
 }
-.linksButton:hover { background: #f1f5f9; }
-.addButton { background: #346eee; color: #fff; border-color: #346eee; }
-.addButton:hover { background: #2f63d2; }
-.favoriteButton { flex: 0 0 32px; height: 32px; }
-@media screen and (max-width: 950px) {
-  .header { flex-wrap: wrap; gap: 14px; }
-  .buttonsAndSearchContainer { flex: 1 1 auto; justify-content: flex-end; }
+.adminInfo { min-width: 205px; }
+.demoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #c4e5d1;
+  border-radius: 99px;
+  padding: 5px 10px;
+  background: #f0f9f4;
+  color: #247049;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: .015em;
 }
-@media screen and (max-width: 750px) {
-  .buttonsAndSearchContainer { justify-content: center; }
-  .buttonsContainer { justify-content: center; }
+.demoDot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #349d62;
 }
-
-/* Restore is available only in authenticated demo mode. */
-.restoreButton {
+.adminInfo p {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 8px;
+  max-width: 285px;
+}
+.adminActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.addButton, .linksButton, .restoreButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  padding: 0 12px;
-  min-height: 38px;
-  border: 1px solid #cbd5e1;
-  border-radius: 9px;
-  background: #f8fafc;
-  color: #334155;
-  font: inherit;
+  gap: 7px;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 10px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 650;
+  white-space: nowrap;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.addButton {
+  border: 1px solid #346eee;
+  background: #346eee;
+  color: #fff;
+}
+.addButton span { font-size: 20px; font-weight: 400; line-height: 1; }
+.addButton:hover { background: #2859c4; border-color: #2859c4; }
+.linksButton {
+  border: 1px solid #d7dfea;
+  background: #fff;
+  color: #334155;
+}
+.linksButton:hover { background: #f3f6fa; }
+.restoreButton {
+  border: 1px solid transparent;
+  background: #f2f5f9;
+  color: #52627a;
+}
+.restoreButton span { font-size: 19px; line-height: 1; }
+.restoreButton:hover:not(:disabled) { background: #e5eaf1; }
+.restoreButton:disabled { opacity: .55; cursor: wait; }
+.addButton:focus-visible, .linksButton:focus-visible,
+.restoreButton:focus-visible, .favoriteButton:focus-visible,
+.authButton:focus-visible, .dialogActions button:focus-visible {
+  outline: 3px solid rgba(52, 110, 238, .35);
+  outline-offset: 2px;
+}
+.restoreDialog {
+  width: min(440px, calc(100vw - 32px));
+  max-width: 440px;
+  margin: auto;
+  padding: 28px;
+  border: 1px solid #e7eaf0;
+  border-radius: 18px;
+  background: #fff;
+  color: #17233b;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, .18);
+}
+.restoreDialog::backdrop { background: rgba(14, 25, 44, .53); }
+.dialogIcon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 17px;
+  border-radius: 13px;
+  background: #eef3fe;
+  color: #346eee;
+  font-size: 30px;
+}
+.dialogTitle {
+  font-size: 23px;
+  font-weight: 750;
+  letter-spacing: -.025em;
+  margin-bottom: 12px;
+}
+.dialogDescription {
+  color: #56657a;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.dialogActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 26px;
+}
+.cancelButton, .confirmButton {
+  padding: 11px 16px;
+  min-height: 42px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 650;
   cursor: pointer;
 }
-.restoreButton:hover:not(:disabled), .restoreButton:focus-visible { background: #e2e8f0; }
-.restoreButton:disabled { opacity: .6; cursor: wait; }
+.cancelButton {
+  color: #334155;
+  background: #fff;
+  border: 1px solid #d7dfea;
+}
+.cancelButton:hover { background: #f4f7fb; }
+.confirmButton { border: 1px solid #346eee; background: #346eee; color: #fff; }
+.confirmButton:hover { background: #2859c4; }
+.confirmButton:disabled { opacity: .6; cursor: wait; }
+@media (max-width: 1060px) {
+  .adminBar { align-items: stretch; flex-direction: column; gap: 14px; }
+  .adminActions { justify-content: flex-start; }
+  .adminInfo p { max-width: none; }
+}
+@media (max-width: 780px) {
+  .header { padding-top: 18px; }
+  .topbar { flex-wrap: wrap; gap: 16px; }
+  .brand { width: 100%; justify-content: center; }
+  .utilities { width: 100%; flex: 1 1 100%; }
+  .search { width: auto; }
+}
+@media (max-width: 540px) {
+  .utilities { flex-wrap: wrap; gap: 9px; }
+  .search { flex: 1 1 100%; order: 3; }
+  .favoriteButton, .authButton { flex: 1 1 auto; }
+  .adminBar { padding: 16px; gap: 16px; }
+  .adminActions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  .adminActions .addButton { grid-column: 1 / -1; }
+  .adminActions .restoreButton { grid-column: 1 / -1; }
+  .adminActions .linksButton { grid-column: 1 / -1; }
+  .adminActions button { white-space: normal; text-align: center; }
+  .restoreDialog { padding: 23px; }
+  .dialogActions { flex-direction: column-reverse; }
+  .dialogActions button { width: 100%; }
+}
