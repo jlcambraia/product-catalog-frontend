@@ -34,13 +34,13 @@ const LinksPopup = ({ setPopupLinks }: PopupLinksProps) => {
 	};
 
 	const links = [
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/bag.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/bag-2.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/chair.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/monitor.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/phone.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/sneakers.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/tshirt.png`,
+		`${process.env.NEXT_PUBLIC_ASSETS_BASE_URL}/bag.png`,
+		`${process.env.NEXT_PUBLIC_ASSETS_BASE_URL}/bag-2.png`,
+		`${process.env.NEXT_PUBLIC_ASSETS_BASE_URL}/chair.png`,
+		`${process.env.NEXT_PUBLIC_ASSETS_BASE_URL}/monitor.png`,
+		`${process.env.NEXT_PUBLIC_ASSETS_BASE_URL}/phone.png`,
+		`${process.env.NEXT_PUBLIC_ASSETS_BASE_URL}/sneakers.png`,
+		`${process.env.NEXT_PUBLIC_ASSETS_BASE_URL}/tshirt.png`,
 	];
 
 	const copyText = async (text: string, index: number) => {
