@@ -10,7 +10,7 @@ import { useAuth } from '@/context/AuthContext';
 import { HeaderProps } from '@/types/types';
 
 const Header = ({
-  products, allProducts, setProducts, setAllProducts, setActiveCategory, isLikedList,
+  allProducts, setProducts, setActiveCategory, isLikedList, onProductCreated,
 }: HeaderProps) => {
   const [popupCreate, setPopupCreate] = useState(false);
   const [popupLinks, setPopupLinks] = useState(false);
@@ -46,10 +46,8 @@ const Header = ({
       </header>
       {authenticated && popupCreate && (
         <CreateProductPopup
-          products={products}
           setPopupCreate={setPopupCreate}
-          setProducts={setProducts}
-          setAllProducts={setAllProducts}
+          onProductCreated={onProductCreated}
         />
       )}
       {authenticated && popupLinks && <LinksPopup setPopupLinks={setPopupLinks} />}
