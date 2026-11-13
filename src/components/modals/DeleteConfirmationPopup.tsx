@@ -8,6 +8,7 @@ const DeleteConfirmationPopup = ({
 	setPopupDelete,
 	setProducts,
 	setAllProducts,
+	setIsLikedList,
 }: PopupDeleteProps) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [deleteProductLoading, setDeleteProductLoading] =
