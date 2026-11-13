@@ -49,11 +49,6 @@ export default function Home() {
 	}, []);
 
   const handleRestoreDemo = async () => {
-    const confirmed = window.confirm(
-      'Restaurar catálogo de demonstração? Produtos criados, exclusões e alterações de estoque desta sessão serão descartados. O banco de dados original não será alterado.'
-    );
-    if (!confirmed) return;
-
     setIsRestoringDemo(true);
     setIsLoading(true);
     setSuccessMessage('');
