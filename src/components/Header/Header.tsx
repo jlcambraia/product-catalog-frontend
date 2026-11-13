@@ -32,8 +32,8 @@ const Header = ({
           <div className={styles.buttonsContainer}>
             {!loading && authenticated && (
               <>
-                <button type='button' aria-label='Links de imagens' className={styles.linksButton} onClick={() => setPopupLinks(true)} />
-                <button type='button' aria-label='Adicionar produto' className={styles.addButton} onClick={() => setPopupCreate(true)} />
+                <button type='button' className={styles.linksButton} onClick={() => setPopupLinks(true)}>Links de imagens</button>
+                <button type='button' className={styles.addButton} onClick={() => setPopupCreate(true)}>+ Adicionar produto</button>
               </>
             )}
             <button type='button' aria-label='Ver favoritos' onClick={favoriteButtonFilter} className={styles.favoriteButton} />
