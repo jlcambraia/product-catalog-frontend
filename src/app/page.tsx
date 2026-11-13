@@ -20,6 +20,7 @@ export default function Home() {
 	);
 	const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
 	useEffect(() => {
 		setPopupWarning(true);
@@ -46,6 +47,13 @@ export default function Home() {
 		fetchProducts();
 	}, []);
 
+  const handleProductCreated = (product: ProductsInterface) => {
+    setAllProducts(previous => [product, ...previous.filter(item => item._id !== product._id)]);
+    setProducts(previous => [product, ...previous.filter(item => item._id !== product._id)]);
+    setActiveCategory('Todos');
+    setSuccessMessage(`Produto "${product.name}" adicionado ao catálogo de demonstração!`);
+  };
+
 	const handleFilterByCategory = (category: string | Category): void => {
 		setActiveCategory(category.toString());
 
@@ -71,8 +79,10 @@ export default function Home() {
 					setAllProducts={setAllProducts}
 					setActiveCategory={setActiveCategory}
 					isLikedList={isLikedList}
+            onProductCreated={handleProductCreated}
 				/>
 				<main className={styles.main}>
+            {successMessage && <div role='status' className={styles.successMessage}>{successMessage}<button type='button' aria-label='Dispensar confirmação' onClick={() => setSuccessMessage('')}>×</button></div>}
 					<CategoryList
 						handleFilterByCategory={handleFilterByCategory}
 						activeCategory={activeCategory}
