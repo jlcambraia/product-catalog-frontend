@@ -15,6 +15,7 @@ const CreateProductPopup = ({
 	const [imageInput, setImageInput] = useState<string>('');
 	const [categoryInput, setCategoryInput] = useState<string>('');
 	const [stockInput, setStockInput] = useState<string>('');
+	const [errorMessage, setErrorMessage] = useState('');
 	const [createProductLoading, setCreateProductLoading] =
 		useState<boolean>(false);
 
@@ -94,13 +95,13 @@ const CreateProductPopup = ({
 					description: descriptionInput,
 					image: imageInput,
 					category: categoryInput as Category,
-					stock: parseInt(stockInput),
+					stock: Number(stockInput),
 				});
 				setProducts((prev) => [newProduct.data, ...prev]);
 				setAllProducts((prev) => [newProduct.data, ...prev]);
 				handleClosePopup();
 			} catch (err) {
-				console.error('Erro ao criar produto:', err);
+				setErrorMessage(err instanceof Error ? err.message : 'Não foi possível criar o produto.');
 			} finally {
 				setCreateProductLoading(false);
 			}
@@ -115,6 +116,7 @@ const CreateProductPopup = ({
 				<button onClick={handleClosePopup} className={styles.button} />
 				<h2 className={styles.title}>Adicione um produto</h2>
 				<form className={styles.form} onSubmit={handleInput}>
+            {errorMessage && <p role='alert'>{errorMessage}</p>}
 					<fieldset className={styles.fieldset}>
 						<input
 							className={styles.input}
