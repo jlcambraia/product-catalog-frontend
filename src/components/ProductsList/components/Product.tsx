@@ -27,7 +27,7 @@ const Product = ({ product, isLikedList, setProducts, setIsLikedList, setAllProd
       </div>
     </li>
     {popupDetails && <ProductDetailPopup setPopupDetails={setPopupDetails} handleLikeButton={handleLikeButton} product={product} isLikedList={isLikedList} setIsLikedList={setIsLikedList} />}
-    {authenticated && popupDelete && <DeleteConfirmationPopup setPopupDelete={setPopupDelete} product={product} setProducts={setProducts} setAllProducts={setAllProducts} />}
+    {authenticated && popupDelete && <DeleteConfirmationPopup setPopupDelete={setPopupDelete} product={product} setProducts={setProducts} setAllProducts={setAllProducts} setIsLikedList={setIsLikedList} />}
   </>;
 };
 export default Product;
