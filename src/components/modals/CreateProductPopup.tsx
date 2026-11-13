@@ -6,8 +6,7 @@ import api from '@/utils/api/Api';
 
 const CreateProductPopup = ({
 	setPopupCreate,
-	setProducts,
-	setAllProducts,
+	onProductCreated,
 }: PopupCreateProps) => {
 	const [nameInput, setNameInput] = useState<string>('');
 	const [priceInput, setPriceInput] = useState<string>('');
@@ -97,8 +96,7 @@ const CreateProductPopup = ({
 					category: categoryInput as Category,
 					stock: Number(stockInput),
 				});
-				setProducts((prev) => [newProduct.data, ...prev]);
-				setAllProducts((prev) => [newProduct.data, ...prev]);
+				onProductCreated(newProduct.data);
 				handleClosePopup();
 			} catch (err) {
 				setErrorMessage(err instanceof Error ? err.message : 'Não foi possível criar o produto.');
@@ -129,6 +127,8 @@ const CreateProductPopup = ({
 						<input
 							className={styles.input}
 							type='number'
+              min='0'
+              step='0.01'
 							placeholder='Preço do produto'
 							onChange={handlePriceInputChange}
 							value={priceInput}
@@ -166,6 +166,8 @@ const CreateProductPopup = ({
 						<input
 							className={styles.input}
 							type='number'
+              min='0'
+              step='1'
 							placeholder='Estoque do produto'
 							onChange={handleStockInputChange}
 							value={stockInput}
@@ -190,13 +192,15 @@ const CreateProductPopup = ({
 					/>
 
 					<button
+              type='submit'
+              disabled={createProductLoading}
 						className={
 							createProductLoading
 								? styles.submitButtonLoading
 								: styles.submitButton
 						}
 					>
-						{createProductLoading ? 'Salvando...' : 'Enviar'}
+						{createProductLoading ? 'Salvando...' : 'Adicionar produto'}
 					</button>
 				</form>
 			</div>
