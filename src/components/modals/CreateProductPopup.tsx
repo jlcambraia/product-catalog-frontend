@@ -111,7 +111,7 @@ const CreateProductPopup = ({
 	return (
 		<div className={styles.popup} onClick={handleOverlayClick} data-popup>
 			<div className={styles.container}>
-				<button type='button' aria-label='Fechar formulário' onClick={handleClosePopup} className={styles.button} />
+				<button type='button' aria-label='Fechar formulário' onClick={handleClosePopup} className={styles.button}>×</button>
 				<h2 className={styles.title}>Adicione um produto</h2>
 				<form className={styles.form} onSubmit={handleInput}>
             {errorMessage && <p role='alert'>{errorMessage}</p>}
