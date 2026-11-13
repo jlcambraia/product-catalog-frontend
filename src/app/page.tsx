@@ -19,7 +19,7 @@ export default function Home() {
 		false
 	);
 	const [isLoading, setIsLoading] = useState(true);
-  const [loadError, setLoadError] = useState(false);
+  const [loadError, setLoadError] = useState('');
 
 	useEffect(() => {
 		setPopupWarning(true);
@@ -37,7 +37,7 @@ export default function Home() {
 				setAllProducts(reversedForAllProducts);
 			} catch (err) {
 				console.error('Erro ao buscar produtos:', err);
-        setLoadError(true);
+        setLoadError(err instanceof Error ? err.message : 'Falha desconhecida');
 			} finally {
 				setIsLoading(false);
 			}
@@ -78,7 +78,7 @@ export default function Home() {
 						activeCategory={activeCategory}
 						allProducts={allProducts}
 					/>
-					{loadError ? <p role='alert'>Não foi possível carregar os produtos. Atualize a página e tente novamente.</p> : <ProductsList
+					{loadError ? <p role='alert'>Não foi possível carregar os produtos: {loadError}. Confira a configuração da API no Vercel.</p> : <ProductsList
 						products={products}
 						isLikedList={isLikedList}
 						setIsLikedList={setIsLikedList}
