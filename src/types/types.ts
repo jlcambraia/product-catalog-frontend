@@ -73,19 +73,19 @@ export type PopupDetailsProps = {
 export type PopupCreateProps = {
 	products: ProductsInterface[];
 	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
-	setPopupCreate: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
+	setPopupCreate: React.Dispatch<React.SetStateAction<boolean>>;
 	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 };
 
 export type PopupLinksProps = {
-	setPopupLinks: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
+	setPopupLinks: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type PopupDeleteProps = {
 	product: ProductsInterface;
 	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
-	setPopupDelete: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
+	setPopupDelete: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type PopupWarningProps = {
