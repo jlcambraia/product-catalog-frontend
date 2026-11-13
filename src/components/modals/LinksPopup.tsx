@@ -57,7 +57,7 @@ const LinksPopup = ({ setPopupLinks }: PopupLinksProps) => {
 	return (
 		<div className={styles.popup} onClick={handleOverlayClick} data-popup>
 			<div className={styles.container}>
-				<button type='button' aria-label='Fechar links de imagens' className={styles.button} onClick={handleClosePopup} />
+				<button type='button' aria-label='Fechar links de imagens' className={styles.button} onClick={handleClosePopup}>×</button>
 				<h2 className={styles.title}>
 					Copie o link de uma imagem para criar seu produto!
 				</h2>
