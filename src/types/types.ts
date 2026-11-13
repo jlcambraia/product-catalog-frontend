@@ -63,7 +63,7 @@ export type ProductProps = {
 };
 
 export type PopupDetailsProps = {
-	setPopupDetails: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
+	setPopupDetails: React.Dispatch<React.SetStateAction<boolean>>;
 	handleLikeButton: () => void;
 	product: ProductsInterface;
 	isLikedList: ProductsInterface[];
