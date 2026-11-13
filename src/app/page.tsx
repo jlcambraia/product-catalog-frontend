@@ -21,6 +21,7 @@ export default function Home() {
 	const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [isRestoringDemo, setIsRestoringDemo] = useState(false);
 
 	useEffect(() => {
 		setPopupWarning(true);
@@ -46,6 +47,33 @@ export default function Home() {
 
 		fetchProducts();
 	}, []);
+
+  const handleRestoreDemo = async () => {
+    const confirmed = window.confirm(
+      'Restaurar catálogo de demonstração? Produtos criados, exclusões e alterações de estoque desta sessão serão descartados. O banco de dados original não será alterado.'
+    );
+    if (!confirmed) return;
+
+    setIsRestoringDemo(true);
+    setIsLoading(true);
+    setSuccessMessage('');
+    setLoadError('');
+    try {
+      api.resetDemo();
+      const response = await api.getProducts();
+      const original = [...response.data].reverse() as ProductsInterface[];
+      setAllProducts(original);
+      setProducts(original);
+      setIsLikedList([]);
+      setActiveCategory('Todos');
+      setSuccessMessage('Catálogo de demonstração restaurado! Todas as alterações simuladas desta sessão foram descartadas.');
+    } catch (error) {
+      setLoadError(error instanceof Error ? error.message : 'Falha ao restaurar o catálogo');
+    } finally {
+      setIsLoading(false);
+      setIsRestoringDemo(false);
+    }
+  };
 
   const handleProductCreated = (product: ProductsInterface) => {
     setAllProducts(previous => [product, ...previous.filter(item => item._id !== product._id)]);
@@ -80,6 +108,8 @@ export default function Home() {
 					setActiveCategory={setActiveCategory}
 					isLikedList={isLikedList}
             onProductCreated={handleProductCreated}
+            onRestoreDemo={handleRestoreDemo}
+            isRestoringDemo={isRestoringDemo}
 				/>
 				<main className={styles.main}>
             {successMessage && <div role='status' className={styles.successMessage}>{successMessage}<button type='button' aria-label='Dispensar confirmação' onClick={() => setSuccessMessage('')}>×</button></div>}
