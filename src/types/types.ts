@@ -26,6 +26,7 @@ export type HeaderProps = {
 	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setActiveCategory: React.Dispatch<React.SetStateAction<string>>;
 	isLikedList: ProductsInterface[];
+	onProductCreated: (product: ProductsInterface) => void;
 };
 
 export type SearchProps = {
@@ -71,10 +72,8 @@ export type PopupDetailsProps = {
 };
 
 export type PopupCreateProps = {
-	products: ProductsInterface[];
-	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setPopupCreate: React.Dispatch<React.SetStateAction<boolean>>;
-	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	onProductCreated: (product: ProductsInterface) => void;
 };
 
 export type PopupLinksProps = {
