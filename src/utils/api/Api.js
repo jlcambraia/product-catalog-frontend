@@ -27,6 +27,11 @@ class Api {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(changes));
   }
 
+  resetDemo() {
+    if (typeof window === 'undefined') return;
+    sessionStorage.removeItem(STORAGE_KEY);
+  }
+
   async getProducts() {
     const response = await this._request('/products');
     const changes = this._changes();
