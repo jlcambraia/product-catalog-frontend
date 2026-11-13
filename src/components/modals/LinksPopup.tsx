@@ -33,14 +33,15 @@ const LinksPopup = ({ setPopupLinks }: PopupLinksProps) => {
 		}
 	};
 
+	const imageBase = (process.env.NEXT_PUBLIC_ASSETS_BASE_URL || process.env.NEXT_PUBLIC_MAINAPI_BASE_URL || 'https://product-catalog-backend-ssr2.onrender.com').replace(/\/$/, '');
 	const links = [
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/bag.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/bag-2.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/chair.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/monitor.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/phone.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/sneakers.png`,
-		`${process.env.NEXT_PUBLIC_MAINAPI_BASE_URL}/tshirt.png`,
+		`${imageBase}/bag.png`,
+		`${imageBase}/bag-2.png`,
+		`${imageBase}/chair.png`,
+		`${imageBase}/monitor.png`,
+		`${imageBase}/phone.png`,
+		`${imageBase}/sneakers.png`,
+		`${imageBase}/tshirt.png`,
 	];
 
 	const copyText = async (text: string, index: number) => {
@@ -56,7 +57,7 @@ const LinksPopup = ({ setPopupLinks }: PopupLinksProps) => {
 	return (
 		<div className={styles.popup} onClick={handleOverlayClick} data-popup>
 			<div className={styles.container}>
-				<button className={styles.button} onClick={handleClosePopup} />
+				<button type='button' aria-label='Fechar links de imagens' className={styles.button} onClick={handleClosePopup}>×</button>
 				<h2 className={styles.title}>
 					Copie o link de uma imagem para criar seu produto!
 				</h2>

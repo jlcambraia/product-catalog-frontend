@@ -6,8 +6,7 @@ import api from '@/utils/api/Api';
 
 const CreateProductPopup = ({
 	setPopupCreate,
-	setProducts,
-	setAllProducts,
+	onProductCreated,
 }: PopupCreateProps) => {
 	const [nameInput, setNameInput] = useState<string>('');
 	const [priceInput, setPriceInput] = useState<string>('');
@@ -15,6 +14,7 @@ const CreateProductPopup = ({
 	const [imageInput, setImageInput] = useState<string>('');
 	const [categoryInput, setCategoryInput] = useState<string>('');
 	const [stockInput, setStockInput] = useState<string>('');
+	const [errorMessage, setErrorMessage] = useState('');
 	const [createProductLoading, setCreateProductLoading] =
 		useState<boolean>(false);
 
@@ -94,13 +94,12 @@ const CreateProductPopup = ({
 					description: descriptionInput,
 					image: imageInput,
 					category: categoryInput as Category,
-					stock: parseInt(stockInput),
+					stock: Number(stockInput),
 				});
-				setProducts((prev) => [newProduct.data, ...prev]);
-				setAllProducts((prev) => [newProduct.data, ...prev]);
+				onProductCreated(newProduct.data);
 				handleClosePopup();
 			} catch (err) {
-				console.error('Erro ao criar produto:', err);
+				setErrorMessage(err instanceof Error ? err.message : 'Não foi possível criar o produto.');
 			} finally {
 				setCreateProductLoading(false);
 			}
@@ -112,9 +111,10 @@ const CreateProductPopup = ({
 	return (
 		<div className={styles.popup} onClick={handleOverlayClick} data-popup>
 			<div className={styles.container}>
-				<button onClick={handleClosePopup} className={styles.button} />
+				<button type='button' aria-label='Fechar formulário' onClick={handleClosePopup} className={styles.button}>×</button>
 				<h2 className={styles.title}>Adicione um produto</h2>
 				<form className={styles.form} onSubmit={handleInput}>
+            {errorMessage && <p role='alert'>{errorMessage}</p>}
 					<fieldset className={styles.fieldset}>
 						<input
 							className={styles.input}
@@ -127,6 +127,8 @@ const CreateProductPopup = ({
 						<input
 							className={styles.input}
 							type='number'
+              min='0'
+              step='0.01'
 							placeholder='Preço do produto'
 							onChange={handlePriceInputChange}
 							value={priceInput}
@@ -164,6 +166,8 @@ const CreateProductPopup = ({
 						<input
 							className={styles.input}
 							type='number'
+              min='0'
+              step='1'
 							placeholder='Estoque do produto'
 							onChange={handleStockInputChange}
 							value={stockInput}
@@ -188,13 +192,15 @@ const CreateProductPopup = ({
 					/>
 
 					<button
+              type='submit'
+              disabled={createProductLoading}
 						className={
 							createProductLoading
 								? styles.submitButtonLoading
 								: styles.submitButton
 						}
 					>
-						{createProductLoading ? 'Salvando...' : 'Enviar'}
+						{createProductLoading ? 'Salvando...' : 'Adicionar produto'}
 					</button>
 				</form>
 			</div>

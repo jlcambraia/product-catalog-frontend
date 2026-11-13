@@ -1,81 +1,139 @@
+'use client';
+
 import styles from './Header.module.css';
 import Search from './components/Search';
 import Image from 'next/image';
 import logo from '../../../public/logo.png';
 import CreateProductPopup from '../modals/CreateProductPopup';
 import LinksPopup from '../modals/LinksPopup';
-import { useState } from 'react';
-
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useAuth } from '@/context/AuthContext';
 import { HeaderProps } from '@/types/types';
 
 const Header = ({
-	products,
-	allProducts,
-	setProducts,
-	setAllProducts,
-	setActiveCategory,
-	isLikedList,
+  allProducts, setProducts, setActiveCategory, isLikedList,
+  onProductCreated, onRestoreDemo, isRestoringDemo,
 }: HeaderProps) => {
-	const [popupCreate, setPopupCreate] = useState<HTMLElement | boolean>(false);
-	const [popupLinks, setPopupLinks] = useState<HTMLElement | boolean>(false);
+  const [popupCreate, setPopupCreate] = useState(false);
+  const [popupLinks, setPopupLinks] = useState(false);
+  const [restoreDialogOpen, setRestoreDialogOpen] = useState(false);
+  const restoreDialogRef = useRef<HTMLDialogElement>(null);
+  const { authenticated, loading, logout } = useAuth();
 
-	const favoriteButtonFilter = () => {
-		setProducts(isLikedList);
-		setActiveCategory('');
-	};
+  useEffect(() => {
+    const dialog = restoreDialogRef.current;
+    if (!dialog) return;
 
-	const handleOpenPopupCreate = () => {
-		setPopupCreate(true);
-	};
+    if (restoreDialogOpen && !dialog.open) {
+      dialog.showModal();
+    } else if (!restoreDialogOpen && dialog.open) {
+      dialog.close();
+    }
+  }, [restoreDialogOpen]);
 
-	const handleOpenPopupLinks = () => {
-		setPopupLinks(true);
-	};
+  const favoriteButtonFilter = () => {
+    const availableIds = new Set(allProducts.map((item) => item._id));
+    setProducts(isLikedList.filter((item) => availableIds.has(item._id)));
+    setActiveCategory('');
+  };
 
-	return (
-		<>
-			<header className={styles.header}>
-				<div className={styles.container}>
-					<Image
-						className={styles.image}
-						src={logo}
-						alt='Imagem de uma Bolsa'
-					/>
-					<h1 className={styles.title}>MeuCatálogo</h1>
-				</div>
-				<div className={styles.buttonsAndSearchContainer}>
-					<div className={styles.buttonsContainer}>
-						<button
-							className={styles.linksButton}
-							onClick={handleOpenPopupLinks}
-						></button>
-						<button
-							className={styles.addButton}
-							onClick={handleOpenPopupCreate}
-						/>
-						<button
-							onClick={favoriteButtonFilter}
-							className={styles.favoriteButton}
-						/>
-						<Search
-							allProducts={allProducts}
-							setProducts={setProducts}
-							setActiveCategory={setActiveCategory}
-						/>
-					</div>
-				</div>
-			</header>
-			{popupCreate && (
-				<CreateProductPopup
-					products={products}
-					setPopupCreate={setPopupCreate}
-					setProducts={setProducts}
-					setAllProducts={setAllProducts}
-				/>
-			)}
-			{popupLinks && <LinksPopup setPopupLinks={setPopupLinks} />}
-		</>
-	);
+  const confirmRestore = () => {
+    setRestoreDialogOpen(false);
+    void onRestoreDemo();
+  };
+
+  return (
+    <>
+      <header className={styles.header}>
+        <div className={styles.topbar}>
+          <div className={styles.brand}>
+            <Image className={styles.image} src={logo} alt='' />
+            <h1 className={styles.title}>MeuCatálogo</h1>
+          </div>
+
+          <nav className={styles.utilities} aria-label='Ações do catálogo'>
+            <div className={styles.search}>
+              <Search allProducts={allProducts} setProducts={setProducts} setActiveCategory={setActiveCategory} />
+            </div>
+            <button
+              type='button'
+              aria-label='Ver favoritos'
+              title='Ver favoritos'
+              className={styles.favoriteButton}
+              onClick={favoriteButtonFilter}
+            >
+              <span aria-hidden='true'>♥</span>
+              <span>Favoritos</span>
+            </button>
+            {!loading && (
+              authenticated
+                ? <button type='button' className={styles.authButton} onClick={() => void logout()}>Sair</button>
+                : <Link className={styles.authButton} href='/admin/login'>Entrar</Link>
+            )}
+          </nav>
+        </div>
+
+        {!loading && authenticated && (
+          <section className={styles.adminBar} aria-label='Ferramentas administrativas de demonstração'>
+            <div className={styles.adminInfo}>
+              <span className={styles.demoBadge}><span className={styles.demoDot} aria-hidden='true' />Modo demonstração</span>
+              <p>Experimente os recursos sem alterar os produtos originais.</p>
+            </div>
+            <div className={styles.adminActions}>
+              <button type='button' className={styles.addButton} onClick={() => setPopupCreate(true)}>
+                <span aria-hidden='true'>+</span> Adicionar produto
+              </button>
+              <button type='button' className={styles.linksButton} onClick={() => setPopupLinks(true)}>
+                Links de imagens
+              </button>
+              <button
+                type='button'
+                className={styles.restoreButton}
+                onClick={() => setRestoreDialogOpen(true)}
+                disabled={isRestoringDemo}
+              >
+                <span aria-hidden='true'>↻</span> {isRestoringDemo ? 'Restaurando...' : 'Restaurar catálogo'}
+              </button>
+            </div>
+          </section>
+        )}
+      </header>
+
+      {authenticated && popupCreate && (
+        <CreateProductPopup setPopupCreate={setPopupCreate} onProductCreated={onProductCreated} />
+      )}
+      {authenticated && popupLinks && <LinksPopup setPopupLinks={setPopupLinks} />}
+
+      <dialog
+        ref={restoreDialogRef}
+        className={styles.restoreDialog}
+        aria-labelledby='restore-title'
+        aria-describedby='restore-description'
+        onClose={() => setRestoreDialogOpen(false)}
+      >
+        <div className={styles.dialogIcon} aria-hidden='true'>↻</div>
+        <h2 id='restore-title' className={styles.dialogTitle}>Restaurar catálogo?</h2>
+        <p id='restore-description' className={styles.dialogDescription}>
+          Os produtos adicionados, as exclusões simuladas e as alterações de estoque desta sessão serão desfeitos.
+          Seus produtos originais no banco de dados não serão alterados.
+        </p>
+        <div className={styles.dialogActions}>
+          <button type='button' className={styles.cancelButton} onClick={() => setRestoreDialogOpen(false)}>
+            Cancelar
+          </button>
+          <button
+            type='button'
+            className={styles.confirmButton}
+            onClick={confirmRestore}
+            disabled={isRestoringDemo}
+          >
+            Sim, restaurar
+          </button>
+        </div>
+      </dialog>
+    </>
+  );
 };
 
 export default Header;

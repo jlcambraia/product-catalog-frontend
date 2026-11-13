@@ -8,7 +8,9 @@ const DeleteConfirmationPopup = ({
 	setPopupDelete,
 	setProducts,
 	setAllProducts,
+	setIsLikedList,
 }: PopupDeleteProps) => {
+	const [errorMessage, setErrorMessage] = useState('');
 	const [deleteProductLoading, setDeleteProductLoading] =
 		useState<boolean>(false);
 
@@ -53,9 +55,13 @@ const DeleteConfirmationPopup = ({
 				setAllProducts((prevProducts) =>
 					prevProducts.filter((p) => p._id !== product._id)
 				);
+				setIsLikedList((prevFavorites) =>
+					prevFavorites.filter((p) => p._id !== product._id)
+				);
+          handleClosePopup();
 			}
 		} catch (err) {
-			console.error('Erro ao excluir produto:', err);
+			setErrorMessage(err instanceof Error ? err.message : 'Não foi possível excluir o produto.');
 		} finally {
 			setDeleteProductLoading(false);
 		}
@@ -66,6 +72,7 @@ const DeleteConfirmationPopup = ({
 			<div className={styles.container}>
 				<button className={styles.button} onClick={handleClosePopup} />
 				<h2 className={styles.title}>Tem certeza?</h2>
+          {errorMessage && <p role='alert'>{errorMessage}</p>}
 				<button
 					onClick={handleDeleteProduct}
 					className={

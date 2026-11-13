@@ -1,0 +1,42 @@
+name: Phase 1 - synchronize dependencies and validate
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [feature/admin-auth-phase1]
+permissions:
+  contents: write
+jobs:
+  sync-and-build:
+    if: github.head_ref == 'feature/admin-auth-phase1' || github.ref == 'refs/heads/feature/admin-auth-phase1'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/admin-auth-phase1
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Regenerate lockfile
+        run: npm install --package-lock-only --no-audit --no-fund
+      - name: Commit lockfile on feature branch only
+        if: github.event_name == 'push'
+        run: |
+          if ! git diff --quiet -- package-lock.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add package-lock.json
+            git commit -m "fix(deps): synchronize package-lock with Next.js upgrade"
+            git push origin HEAD:feature/admin-auth-phase1
+          fi
+      - name: Install exact dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Typecheck
+        run: npx tsc --noEmit
+      - name: Lint
+        run: npm run lint
+      - name: Production build
+        run: npm run build

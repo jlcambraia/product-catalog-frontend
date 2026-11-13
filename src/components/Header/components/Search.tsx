@@ -37,9 +37,9 @@ const Search = ({
 				value={inputValue}
 				onChange={handleInputChange}
 				className={styles.input}
-				placeholder='Buscar'
+				placeholder='Buscar produtos'
 			/>
-			<button className={styles.button} />
+			<button type='submit' aria-label='Buscar produtos' className={styles.button} />
 		</form>
 	);
 };

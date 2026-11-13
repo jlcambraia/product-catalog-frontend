@@ -19,6 +19,9 @@ export default function Home() {
 		false
 	);
 	const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isRestoringDemo, setIsRestoringDemo] = useState(false);
 
 	useEffect(() => {
 		setPopupWarning(true);
@@ -36,6 +39,7 @@ export default function Home() {
 				setAllProducts(reversedForAllProducts);
 			} catch (err) {
 				console.error('Erro ao buscar produtos:', err);
+        setLoadError(err instanceof Error ? err.message : 'Falha desconhecida');
 			} finally {
 				setIsLoading(false);
 			}
@@ -43,6 +47,35 @@ export default function Home() {
 
 		fetchProducts();
 	}, []);
+
+  const handleRestoreDemo = async () => {
+    setIsRestoringDemo(true);
+    setIsLoading(true);
+    setSuccessMessage('');
+    setLoadError('');
+    try {
+      api.resetDemo();
+      const response = await api.getProducts();
+      const original = [...response.data].reverse() as ProductsInterface[];
+      setAllProducts(original);
+      setProducts(original);
+      setIsLikedList([]);
+      setActiveCategory('Todos');
+      setSuccessMessage('Catálogo de demonstração restaurado! Todas as alterações simuladas desta sessão foram descartadas.');
+    } catch (error) {
+      setLoadError(error instanceof Error ? error.message : 'Falha ao restaurar o catálogo');
+    } finally {
+      setIsLoading(false);
+      setIsRestoringDemo(false);
+    }
+  };
+
+  const handleProductCreated = (product: ProductsInterface) => {
+    setAllProducts(previous => [product, ...previous.filter(item => item._id !== product._id)]);
+    setProducts(previous => [product, ...previous.filter(item => item._id !== product._id)]);
+    setActiveCategory('Todos');
+    setSuccessMessage(`Produto "${product.name}" adicionado ao catálogo de demonstração!`);
+  };
 
 	const handleFilterByCategory = (category: string | Category): void => {
 		setActiveCategory(category.toString());
@@ -69,21 +102,25 @@ export default function Home() {
 					setAllProducts={setAllProducts}
 					setActiveCategory={setActiveCategory}
 					isLikedList={isLikedList}
+            onProductCreated={handleProductCreated}
+            onRestoreDemo={handleRestoreDemo}
+            isRestoringDemo={isRestoringDemo}
 				/>
 				<main className={styles.main}>
+            {successMessage && <div role='status' className={styles.successMessage}>{successMessage}<button type='button' aria-label='Dispensar confirmação' onClick={() => setSuccessMessage('')}>×</button></div>}
 					<CategoryList
 						handleFilterByCategory={handleFilterByCategory}
 						activeCategory={activeCategory}
 						allProducts={allProducts}
 					/>
-					<ProductsList
+					{loadError ? <p role='alert'>Não foi possível carregar os produtos: {loadError}. Confira a configuração da API no Vercel.</p> : <ProductsList
 						products={products}
 						isLikedList={isLikedList}
 						setIsLikedList={setIsLikedList}
 						setProducts={setProducts}
 						setAllProducts={setAllProducts}
 						isLoading={isLoading}
-					/>
+					/>}
 				</main>
 				<Footer />
 				{popupWarning && <WarningPopup setPopupWarning={setPopupWarning} />}

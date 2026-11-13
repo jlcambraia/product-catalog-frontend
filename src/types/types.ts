@@ -26,6 +26,9 @@ export type HeaderProps = {
 	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setActiveCategory: React.Dispatch<React.SetStateAction<string>>;
 	isLikedList: ProductsInterface[];
+	onProductCreated: (product: ProductsInterface) => void;
+	onRestoreDemo: () => Promise<void>;
+	isRestoringDemo: boolean;
 };
 
 export type SearchProps = {
@@ -63,7 +66,7 @@ export type ProductProps = {
 };
 
 export type PopupDetailsProps = {
-	setPopupDetails: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
+	setPopupDetails: React.Dispatch<React.SetStateAction<boolean>>;
 	handleLikeButton: () => void;
 	product: ProductsInterface;
 	isLikedList: ProductsInterface[];
@@ -71,21 +74,20 @@ export type PopupDetailsProps = {
 };
 
 export type PopupCreateProps = {
-	products: ProductsInterface[];
-	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
-	setPopupCreate: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
-	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	setPopupCreate: React.Dispatch<React.SetStateAction<boolean>>;
+	onProductCreated: (product: ProductsInterface) => void;
 };
 
 export type PopupLinksProps = {
-	setPopupLinks: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
+	setPopupLinks: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type PopupDeleteProps = {
 	product: ProductsInterface;
 	setProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
 	setAllProducts: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
-	setPopupDelete: React.Dispatch<React.SetStateAction<HTMLElement | boolean>>;
+	setIsLikedList: React.Dispatch<React.SetStateAction<ProductsInterface[]>>;
+	setPopupDelete: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type PopupWarningProps = {
