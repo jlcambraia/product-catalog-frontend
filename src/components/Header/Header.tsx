@@ -10,7 +10,7 @@ import { useAuth } from '@/context/AuthContext';
 import { HeaderProps } from '@/types/types';
 
 const Header = ({
-  allProducts, setProducts, setActiveCategory, isLikedList, onProductCreated,
+  allProducts, setProducts, setActiveCategory, isLikedList, onProductCreated, onRestoreDemo, isRestoringDemo,
 }: HeaderProps) => {
   const [popupCreate, setPopupCreate] = useState(false);
   const [popupLinks, setPopupLinks] = useState(false);
@@ -34,6 +34,9 @@ const Header = ({
               <>
                 <button type='button' className={styles.linksButton} onClick={() => setPopupLinks(true)}>Links de imagens</button>
                 <button type='button' className={styles.addButton} onClick={() => setPopupCreate(true)}>+ Adicionar produto</button>
+                <button type='button' className={styles.restoreButton} onClick={() => void onRestoreDemo()} disabled={isRestoringDemo} title='Descartar mudanças de demonstração deste navegador e recuperar o catálogo original'>
+                  {isRestoringDemo ? 'Restaurando...' : '↻ Restaurar catálogo de demonstração'}
+                </button>
               </>
             )}
             <button type='button' aria-label='Ver favoritos' onClick={favoriteButtonFilter} className={styles.favoriteButton} />
