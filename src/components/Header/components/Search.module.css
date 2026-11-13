@@ -1,44 +1,35 @@
 .container {
   position: relative;
+  width: 100%;
+  min-width: 0;
 }
-
 .input {
-  font-size: 16px;
-  padding: 10px;
-  padding-left: 38px;
-  border: 1px solid #e1e7e9;
-  border-radius: 8px;
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 14px 10px 42px;
+  border: 1px solid #e0e6ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #1e293b;
+  font-size: 14px;
   outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
 }
-
-.input::placeholder {
-  color: #bababc;
-  font-size: 16px;
+.input::placeholder { color: #94a3b8; }
+.input:focus {
+  border-color: #346eee;
+  box-shadow: 0 0 0 3px rgba(52, 110, 238, .10);
 }
-
 .button {
-  background-image: url(../../../assets/icons/lupa.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   position: absolute;
   top: 50%;
-  transform: translate(-50%, -50%);
-  left: 20px;
-  width: 20px;
-  height: 20px;
-  background-color: transparent;
+  left: 13px;
+  transform: translateY(-50%);
+  width: 19px;
+  height: 19px;
+  padding: 0;
+  background: transparent url(../../../assets/icons/lupa.png) no-repeat center / contain;
   border: none;
+  cursor: pointer;
 }
-
-@media screen and (max-width: 410px) {
-  .input {
-    width: 200px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .input {
-    width: 170px;
-  }
-}
+.button:focus-visible { outline: 2px solid #346eee; outline-offset: 3px; }
