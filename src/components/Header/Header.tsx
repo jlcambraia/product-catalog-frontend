@@ -3,7 +3,6 @@
 import styles from './Header.module.css';
 import Search from './components/Search';
 import Image from 'next/image';
-import logo from '../../../public/logo.png';
 import CreateProductPopup from '../modals/CreateProductPopup';
 import LinksPopup from '../modals/LinksPopup';
 import { useEffect, useRef, useState } from 'react';
@@ -48,7 +47,7 @@ const Header = ({
       <header className={styles.header}>
         <div className={styles.topbar}>
           <div className={styles.brand}>
-            <Image className={styles.image} src={logo} alt='' />
+            <Image className={styles.image} src='/logo.png' width={40} height={40} alt='' />
             <h1 className={styles.title}>MeuCatálogo</h1>
           </div>
 
