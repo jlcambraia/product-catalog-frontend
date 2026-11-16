@@ -5,8 +5,7 @@ import Header from '@/components/Header/Header';
 import CategoryList from '@/components/CategoryList/CategoryList';
 import ProductsList from '@/components/ProductsList/ProductsList';
 import Footer from '@/components/Footer/Footer';
-import WarningPopup from '@/components/modals/WarningPopup';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ProductsInterface, Category } from '@/types/types';
 import api from '@/utils/api/Api.js';
 
@@ -15,38 +14,43 @@ export default function Home() {
 	const [allProducts, setAllProducts] = useState<ProductsInterface[]>([]);
 	const [activeCategory, setActiveCategory] = useState<string>('Todos');
 	const [isLikedList, setIsLikedList] = useState<ProductsInterface[]>([]);
-	const [popupWarning, setPopupWarning] = useState<HTMLElement | boolean>(
-		false
-	);
 	const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [isRestoringDemo, setIsRestoringDemo] = useState(false);
+  const [isSlow, setIsSlow] = useState(false);
+  const [isRetrying, setIsRetrying] = useState(false);
 
-	useEffect(() => {
-		setPopupWarning(true);
-	}, []);
+  // Free-tier hosting may sleep between visits; wait longer and offer manual retry.
+  const loadProducts = useCallback(async (retry = false) => {
+    setIsLoading(true);
+    setIsSlow(false);
+    setLoadError('');
+    if (retry) setIsRetrying(true);
+    const slowTimer = window.setTimeout(() => setIsSlow(true), 8000);
+    try {
+      const response = await api.getProducts();
+      if (!Array.isArray(response.data)) {
+        throw new Error('Formato de produtos inválido');
+      }
+      const sorted = [...response.data].reverse();
+      setProducts(sorted);
+      setAllProducts(sorted);
+    } catch (error) {
+      // No API-specific technical details are shown to portfolio visitors.
+      console.error('Falha ao carregar catálogo:', error);
+      setLoadError('Não conseguimos carregar os produtos agora. A API pode estar acordando após um período de inatividade ou indisponível temporariamente.');
+    } finally {
+      window.clearTimeout(slowTimer);
+      setIsLoading(false);
+      setIsSlow(false);
+      setIsRetrying(false);
+    }
+  }, []);
 
-	useEffect(() => {
-		const fetchProducts = async () => {
-			try {
-				const allProducts = await api.getProducts();
-
-				const reversedForProducts = [...allProducts.data].reverse();
-				const reversedForAllProducts = [...allProducts.data].reverse();
-
-				setProducts(reversedForProducts);
-				setAllProducts(reversedForAllProducts);
-			} catch (err) {
-				console.error('Erro ao buscar produtos:', err);
-        setLoadError(err instanceof Error ? err.message : 'Falha desconhecida');
-			} finally {
-				setIsLoading(false);
-			}
-		};
-
-		fetchProducts();
-	}, []);
+  useEffect(() => {
+    void loadProducts();
+  }, [loadProducts]);
 
   const handleRestoreDemo = async () => {
     setIsRestoringDemo(true);
@@ -63,7 +67,8 @@ export default function Home() {
       setActiveCategory('Todos');
       setSuccessMessage('Catálogo de demonstração restaurado! Todas as alterações simuladas desta sessão foram descartadas.');
     } catch (error) {
-      setLoadError(error instanceof Error ? error.message : 'Falha ao restaurar o catálogo');
+      console.error('Falha ao restaurar catálogo:', error);
+      setLoadError('Não foi possível restaurar o catálogo agora. Tente novamente quando os produtos estiverem disponíveis.');
     } finally {
       setIsLoading(false);
       setIsRestoringDemo(false);
@@ -113,7 +118,17 @@ export default function Home() {
 						activeCategory={activeCategory}
 						allProducts={allProducts}
 					/>
-					{loadError ? <p role='alert'>Não foi possível carregar os produtos: {loadError}. Confira a configuração da API no Vercel.</p> : <ProductsList
+            {isLoading && isSlow && <div className={styles.slowNotice} role='status'>
+              <strong>Ainda estamos carregando o catálogo…</strong>
+              <p>O servidor pode levar mais tempo para responder depois de ficar inativo. Obrigado pela paciência.</p>
+            </div>}
+            {loadError ? <section role='alert' className={styles.errorPanel}>
+              <h2>O catálogo não carregou desta vez</h2>
+              <p>{loadError}</p>
+              <button type='button' className={styles.retryButton} onClick={() => void loadProducts(true)} disabled={isRetrying}>
+                {isRetrying ? 'Tentando novamente…' : 'Tentar novamente'}
+              </button>
+            </section> : <ProductsList
 						products={products}
 						isLikedList={isLikedList}
 						setIsLikedList={setIsLikedList}
@@ -123,8 +138,7 @@ export default function Home() {
 					/>}
 				</main>
 				<Footer />
-				{popupWarning && <WarningPopup setPopupWarning={setPopupWarning} />}
-			</div>
+				</div>
 		</>
 	);
 }
