@@ -1,5 +1,5 @@
 .container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -24,4 +24,74 @@
   color: inherit;
   font-size: 25px;
   cursor: pointer;
+}
+
+/* Keep status and error feedback in normal document flow instead of an
+   intrusive popup; spacing remains comfortable across phone widths. */
+.slowNotice,
+.errorPanel {
+  width: 100%;
+  max-width: 680px;
+  margin: 20px auto 28px;
+  padding: 20px 22px;
+  border-radius: 12px;
+  line-height: 1.6;
+}
+
+.slowNotice {
+  background: #f2f6fc;
+  border: 1px solid #d5e2f5;
+  color: #315273;
+}
+
+.errorPanel {
+  background: #fff;
+  border: 1px solid #e1e5eb;
+  box-shadow: 0 8px 30px rgb(25 41 63 / 6%);
+  color: #344155;
+}
+
+.errorPanel h2 {
+  margin-bottom: 10px;
+  font-size: clamp(18px, 3vw, 22px);
+}
+
+.slowNotice p,
+.errorPanel p {
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+.retryButton {
+  margin-top: 20px;
+  min-height: 44px;
+  padding: 10px 18px;
+  background: #244ca4;
+  border: 1px solid #244ca4;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.retryButton:hover {
+  background: #183e8c;
+}
+
+.retryButton:focus-visible {
+  outline: 3px solid #7eacff;
+  outline-offset: 3px;
+}
+
+.retryButton:disabled {
+  opacity: .55;
+  cursor: progress;
+}
+
+@media (max-width: 540px) {
+  .slowNotice,
+  .errorPanel {
+    margin: 16px 0 24px;
+    padding: 18px 16px;
+  }
 }
