@@ -113,11 +113,13 @@ export default function Home() {
 				/>
 				<main className={styles.main}>
             {successMessage && <div role='status' className={styles.successMessage}>{successMessage}<button type='button' aria-label='Dispensar confirmação' onClick={() => setSuccessMessage('')}>×</button></div>}
-					<CategoryList
-						handleFilterByCategory={handleFilterByCategory}
-						activeCategory={activeCategory}
-						allProducts={allProducts}
-					/>
+            {!isLoading && !loadError && (
+              <CategoryList
+                handleFilterByCategory={handleFilterByCategory}
+                activeCategory={activeCategory}
+                allProducts={allProducts}
+              />
+            )}
             {isLoading && isSlow && <div className={styles.slowNotice} role='status'>
               <strong>Ainda estamos carregando o catálogo…</strong>
               <p>O servidor pode levar mais tempo para responder depois de ficar inativo. Obrigado pela paciência.</p>
